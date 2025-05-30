@@ -14,6 +14,9 @@ public class LevelFlowEditor : EditorWindow
     private LevelFlowGraphView graphView;
     private StartNode startNode;
     private EndNode endNode;
+    private LevelFlowGraphData currentGraphData;
+    private bool shouldLoadAssetOnEnable = false;
+    private LevelFlowGraphData assetToLoad;
 
     [MenuItem("Window/Level Flow Editor")]
     public static void OpenWindow()
@@ -27,12 +30,23 @@ public class LevelFlowEditor : EditorWindow
         ConstructGraphView();
         GenerateToolbar();
 
-        CreateStartEndNodes();
+        // if there are values store to open the SO, do it
+        if (shouldLoadAssetOnEnable && assetToLoad != null)
+        {
+            LoadGraphFromAsset(assetToLoad);
+            currentGraphData = assetToLoad;
+            shouldLoadAssetOnEnable = false;
+            assetToLoad = null;
+        }
+        else
+        {
+            CreateStartEndNodes();
+        }
     }
 
+    // Create startNode and end Node in the begining
     private void CreateStartEndNodes()
     {
-        // Create startNode and end Node in the begining
         if (startNode == null)
         {
             startNode = new StartNode();
@@ -72,10 +86,56 @@ public class LevelFlowEditor : EditorWindow
     {
         var toolbar = new VisualElement();
 
+        toolbar.style.flexDirection = FlexDirection.Row;
+        toolbar.style.backgroundColor = new StyleColor(Color.gray);
+        toolbar.style.paddingTop = 5;
+        toolbar.style.paddingBottom = 5;
+
         AddToolbarButton(toolbar, "Add Dialogue Node", NodeType.Dialogue);
         AddToolbarButton(toolbar, "Add Animation Node", NodeType.Animation);
         AddToolbarButton(toolbar, "Add Scene Transition Node", NodeType.SceneTransition);
         AddToolbarButton(toolbar, "Add Narrative Node", NodeType.Narrative);
+
+        // Add a sagve button
+        var saveButton = new Button(() =>
+        {
+            if (currentGraphData != null)
+            {
+                // if it's saving current data, then rewrite it
+                string assetPath = AssetDatabase.GetAssetPath(currentGraphData);
+                if (!string.IsNullOrEmpty(assetPath))
+                {
+                    graphView.UpdateExistingAsset(currentGraphData);
+                    EditorUtility.SetDirty(currentGraphData);
+                    AssetDatabase.SaveAssets();
+                    Debug.Log("Updated existing graph: " + assetPath);
+                    return;
+                }
+            }
+            string path = EditorUtility.SaveFilePanelInProject("Save Flow Graph", "LevelFlowGraph", "asset", "");
+            if (!string.IsNullOrEmpty(path))
+            {
+                currentGraphData = graphView.SaveGraphToAsset(path);
+                Debug.Log("Saved graph to: " + path);
+            }
+        })
+        {
+            text = "Save Flow Asset"
+        };
+
+        toolbar.Add(saveButton);
+    
+        var clearButton = new Button(() =>
+        {
+            if (EditorUtility.DisplayDialog("Clear Graph", "Are you sure you want to clear the entire graph?", "Yes", "No"))
+            {
+                ClearGraph();
+            }
+        })
+        {
+            text = "Clear Graph"
+        };
+        toolbar.Add(clearButton);
 
         rootVisualElement.Add(toolbar);
     }
@@ -85,6 +145,138 @@ public class LevelFlowEditor : EditorWindow
         var button = new Button(() => graphView.CreateNode(type));
         button.text = label;
         toolbar.Add(button);
+    }
+
+    private void LoadGraphFromAsset(LevelFlowGraphData graphData)
+    {
+        ClearGraph(false);
+
+        // Dictionary to store created nodes by GUID for connection creation
+        Dictionary<string, BaseNode> nodeMap = new Dictionary<string, BaseNode>();
+
+        // Create nodes
+        foreach (var nodeData in graphData.nodes)
+        {
+            BaseNode node = CreateNodeFromData(nodeData);
+            if (node != null)
+            {
+                nodeMap[nodeData.guid] = node;
+                graphView.AddElement(node);
+            }
+        }
+
+        // Create connections
+        foreach (var connectionData in graphData.connections)
+        {
+            if (nodeMap.TryGetValue(connectionData.fromNodeGuid, out BaseNode fromNode) &&
+                nodeMap.TryGetValue(connectionData.toNodeGuid, out BaseNode toNode))
+            {
+                // Find the ports
+                Port outputPort = fromNode.outputContainer.Q<Port>();
+                Port inputPort = toNode.inputContainer.Q<Port>();
+
+                if (outputPort != null && inputPort != null)
+                {
+                    var edge = outputPort.ConnectTo(inputPort);
+                    graphView.AddElement(edge);
+                }
+            }
+        }
+    }
+
+    private BaseNode CreateNodeFromData(NodeData nodeData)
+    {
+        BaseNode node = null;
+
+        switch (nodeData.type)
+        {
+            case "StartNode":
+                startNode = new StartNode();
+                node = startNode;
+                break;
+            case "EndNode":
+                endNode = new EndNode();
+                node = endNode;
+                break;
+            case "NarrativeNode":
+                var narrativeNode = new NarrativeNode();
+                node = narrativeNode;
+                break;
+            case "AnimationNode":
+                var animationNode = new AnimationNode();
+                node = animationNode;
+                break;
+            case "SceneTransitionNode":
+                var sceneNode = new SceneTransitionNode();
+                node = sceneNode;
+                break;
+        }
+
+        if (node != null)
+        {
+            node.title = !string.IsNullOrEmpty(nodeData.title) ? nodeData.title : nodeData.type;
+            node.SetPosition(new Rect(nodeData.position.x, nodeData.position.y, 200, 150));
+            node.Draw();
+
+            // Set node-specific data after drawing
+            if (node is NarrativeNode narrativeNode && !string.IsNullOrEmpty(nodeData.tagValue))
+            {
+                narrativeNode.SetDialogueTag(nodeData.tagValue);
+            }
+            else if (node is AnimationNode animationNode && !string.IsNullOrEmpty(nodeData.triggerValue))
+            {
+                animationNode.SetTriggerName(nodeData.triggerValue);
+            }
+            else if (node is SceneTransitionNode sceneTransitionNode && !string.IsNullOrEmpty(nodeData.sceneName))
+            {
+                sceneTransitionNode.SetSceneName(nodeData.sceneName);
+            }
+        }
+
+        return node;
+    }
+
+    private void ClearGraph(bool createStartEndNode = true)
+    {
+        // Remove all nodes except start and end
+        var nodesToRemove = graphView.nodes.OfType<BaseNode>().ToList();
+        foreach (var node in nodesToRemove)
+        {
+            graphView.RemoveElement(node);
+        }
+
+        // Remove all edges
+        var edgesToRemove = graphView.edges.ToList();
+        foreach (var edge in edgesToRemove)
+        {
+            graphView.RemoveElement(edge);
+        }
+
+        // Reset start and end nodes
+        startNode = null;
+        endNode = null;
+        currentGraphData = null;
+
+        // Recreate start and end nodes
+        if (createStartEndNode) {
+            CreateStartEndNodes();
+        }
+    }
+
+    public void LoadGraphAsset(LevelFlowGraphData asset)
+    {
+        if (asset == null) return;
+
+        if (graphView != null)
+        {
+            LoadGraphFromAsset(asset);
+            currentGraphData = asset;
+        }
+        else
+        {
+            shouldLoadAssetOnEnable = true;
+            assetToLoad = asset;
+        }
     }
 }
 
@@ -152,8 +344,101 @@ public class LevelFlowGraphView : GraphView
             AddElement(node);
         }
     }
+    public LevelFlowGraphData SaveGraphToAsset(string assetPath)
+    {
+        //Create Node and Edge and store it into the SO
+        var asset = ScriptableObject.CreateInstance<LevelFlowGraphData>();
+
+        foreach (var node in nodes.OfType<BaseNode>())
+        {
+            var nodeData = new NodeData
+            {
+                guid = node.GUID,
+                type = node.GetType().Name,
+                position = node.GetPosition().position,
+                title = node.title
+            };
+
+            if (node is NarrativeNode narrativeNode)
+                nodeData.tagValue = narrativeNode.DialogueTag;
+
+            if (node is AnimationNode animationNode)
+                nodeData.triggerValue = animationNode.TriggerName;
+
+            if (node is SceneTransitionNode sceneNode)
+                nodeData.sceneName = sceneNode.SceneName;
+
+            asset.nodes.Add(nodeData);
+        }
+
+        foreach (var edge in edges)
+        {
+            if (edge.input.node is BaseNode inputNode && edge.output.node is BaseNode outputNode)
+            {
+                var connection = new ConnectionData
+                {
+                    fromNodeGuid = outputNode.GUID,
+                    fromPortName = edge.output.portName,
+                    toNodeGuid = inputNode.GUID,
+                    toPortName = edge.input.portName
+                };
+                asset.connections.Add(connection);
+            }
+        }
+
+        AssetDatabase.CreateAsset(asset, assetPath);
+        AssetDatabase.SaveAssets();
+        return asset;
+    }
+
+    public void UpdateExistingAsset(LevelFlowGraphData asset)
+    {
+        // Clear Currnet Data
+        asset.nodes.Clear();
+        asset.connections.Clear();
+
+        // Rewrite Data
+        foreach (var node in nodes.OfType<BaseNode>())
+        {
+            var nodeData = new NodeData
+            {
+                guid = node.GUID,
+                type = node.GetType().Name,
+                position = node.GetPosition().position,
+                title = node.title
+            };
+
+            if (node is NarrativeNode narrativeNode)
+                nodeData.tagValue = narrativeNode.DialogueTag;
+
+            if (node is AnimationNode animationNode)
+                nodeData.triggerValue = animationNode.TriggerName;
+
+            if (node is SceneTransitionNode sceneNode)
+                nodeData.sceneName = sceneNode.SceneName;
+
+            asset.nodes.Add(nodeData);
+        }
+
+        foreach (var edge in edges)
+        {
+            if (edge.input.node is BaseNode inputNode && edge.output.node is BaseNode outputNode)
+            {
+                var connection = new ConnectionData
+                {
+                    fromNodeGuid = outputNode.GUID,
+                    fromPortName = edge.output.portName,
+                    toNodeGuid = inputNode.GUID,
+                    toPortName = edge.input.portName
+                };
+                asset.connections.Add(connection);
+            }
+        }
+    }
+
 }
 
+/*
 public abstract class BaseNode : Node
 {
     public string GUID;
@@ -318,3 +603,4 @@ public class EndNode : BaseNode
         RefreshPorts();
     }
 }
+*/

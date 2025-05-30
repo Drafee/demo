@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcb18a4b4045fb74cae4ba59286bbbf0, type: 3}
+  m_Name: level0
+  m_EditorClassIdentifier: 
+  nodes:
+  - guid: 9bee988e-c0fe-4265-ab7e-131041e975cb
+    type: StartNode
+    position: {x: 102, y: 122.666664}
+    tagValue: 
+    triggerValue: 
+    sceneName: 
+    title: StartNode
+  - guid: 7ea8107e-459a-42d7-af8c-5212cd057e32
+    type: NarrativeNode
+    position: {x: 240.66667, y: 136.66667}
+    tagValue: Scene0_1
+    triggerValue: 
+    sceneName: 
+    title: NarrativeNode
+  - guid: 8f5d1415-7b07-40c5-8577-acd0c02340c4
+    type: SceneTransitionNode
+    position: {x: 483.33334, y: 167.33334}
+    tagValue: 
+    triggerValue: 
+    sceneName: MainScene
+    title: Scene Transition Node
+  - guid: 664cb484-3cd3-4336-b363-4a65e121f03c
+    type: EndNode
+    position: {x: 762, y: 173.33334}
+    tagValue: 
+    triggerValue: 
+    sceneName: 
+    title: EndNode
+  connections:
+  - fromNodeGuid: 9bee988e-c0fe-4265-ab7e-131041e975cb
+    fromPortName: Output
+    toNodeGuid: 7ea8107e-459a-42d7-af8c-5212cd057e32
+    toPortName: Input
+  - fromNodeGuid: 7ea8107e-459a-42d7-af8c-5212cd057e32
+    fromPortName: Output
+    toNodeGuid: 8f5d1415-7b07-40c5-8577-acd0c02340c4
+    toPortName: Input
+  - fromNodeGuid: 8f5d1415-7b07-40c5-8577-acd0c02340c4
+    fromPortName: Output
+    toNodeGuid: 664cb484-3cd3-4336-b363-4a65e121f03c
+    toPortName: Input
