@@ -51,7 +51,7 @@ public class DialogueCSVLoader : MonoBehaviour
 
         // Store Data into the scriptableObject
 #if UNITY_EDITOR
-        string outputPath = "Assets/Dialogues/";
+        string outputPath = "Assets/Resources/Dialogues/";
         if (!Directory.Exists(outputPath))
             Directory.CreateDirectory(outputPath);
 
