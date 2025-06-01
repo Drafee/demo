@@ -43,7 +43,8 @@ public class DialogueManager : MonoBehaviour
 
     private List<DialogueLine> currentLines;
     private int currentLineIndex;
-
+    private string currentLineFullText = ""; // 新增字段
+    bool isTyping = false; // 添加状态标志
     private void Start()
     {
         if (dialoguePanel != null)
@@ -151,55 +152,58 @@ public class DialogueManager : MonoBehaviour
         currentLines = dialogue.lines;
         currentLineIndex = 0;
 
+        if (continueButton != null)
+            continueButton.gameObject.SetActive(true);
         ShowCurrentLine();
     }
-
     private void ShowCurrentLine()
     {
-
         DialogueUI d = GetUIByTag(currentLines[currentLineIndex].speaker);
-        if (d == null) {
+        if (d == null)
+        {
             Debug.LogError($"Cannot find UILine with tag {currentLines[currentLineIndex].speaker}");
         }
         dialoguePanel = d.GetPanel();
         dialogueText = d.GetTextBox();
+
         if (dialoguePanel != null)
             dialoguePanel.SetActive(true);
 
-        if (continueButton != null)
-            continueButton.gameObject.SetActive(false);
-
         if (typingCoroutine != null)
             StopCoroutine(typingCoroutine);
-
         string line = currentLines[currentLineIndex].text;
+        currentLineFullText = line;
+        isTyping = true; // 设置打字状态
         typingCoroutine = StartCoroutine(TypeText(line));
     }
 
     private IEnumerator TypeText(string text)
     {
         dialogueText.text = "";
-
         foreach (char c in text)
         {
             dialogueText.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
-
-        if (continueButton != null)
-            continueButton.gameObject.SetActive(true);
+        isTyping = false; // 打字完成
     }
 
     private void OnContinueClicked()
     {
-        if (typingCoroutine != null)
+        if (isTyping && typingCoroutine != null)
         {
+            // 如果正在打字，快进显示完整文本
             StopCoroutine(typingCoroutine);
+            dialogueText.text = currentLineFullText;
+            isTyping = false;
             typingCoroutine = null;
+            if (continueButton != null)
+                continueButton.gameObject.SetActive(true);
+            return; // 直接返回，不执行后续逻辑
         }
 
+        // 如果不在打字，继续下一句
         currentLineIndex++;
-
         if (currentLineIndex < currentLines.Count)
         {
             if (dialoguePanel != null)
@@ -214,6 +218,8 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
+        if (continueButton != null)
+            continueButton.gameObject.SetActive(false);
         isDialogueActive = false;
 
         if (dialoguePanel != null)

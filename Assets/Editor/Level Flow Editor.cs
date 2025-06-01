@@ -226,6 +226,7 @@ public class LevelFlowEditor : EditorWindow
             else if (node is AnimationNode animationNode && !string.IsNullOrEmpty(nodeData.triggerValue))
             {
                 animationNode.SetTriggerName(nodeData.triggerValue);
+                animationNode.SetAnimator(nodeData.animatorValue);
             }
             else if (node is SceneTransitionNode sceneTransitionNode && !string.IsNullOrEmpty(nodeData.sceneName))
             {
@@ -363,7 +364,10 @@ public class LevelFlowGraphView : GraphView
                 nodeData.tagValue = narrativeNode.DialogueTag;
 
             if (node is AnimationNode animationNode)
+            {
                 nodeData.triggerValue = animationNode.TriggerName;
+                nodeData.animatorValue = animationNode.TargetAnimator;
+            }
 
             if (node is SceneTransitionNode sceneNode)
                 nodeData.sceneName = sceneNode.SceneName;
@@ -412,7 +416,10 @@ public class LevelFlowGraphView : GraphView
                 nodeData.tagValue = narrativeNode.DialogueTag;
 
             if (node is AnimationNode animationNode)
+            {
                 nodeData.triggerValue = animationNode.TriggerName;
+                nodeData.animatorValue = animationNode.TargetAnimator;
+            }
 
             if (node is SceneTransitionNode sceneNode)
                 nodeData.sceneName = sceneNode.SceneName;

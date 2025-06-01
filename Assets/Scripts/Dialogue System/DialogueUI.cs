@@ -9,17 +9,14 @@ public class DialogueUI : MonoBehaviour
     public string characterTag;
     public GameObject dialoguePanel;
     public TextMeshProUGUI textBox;
-    public Button continueButotn;
-
+    private void Start()
+    {
+        dialoguePanel.SetActive(false);
+    }
     public GameObject GetPanel() {
         return dialoguePanel;
     }
     public TextMeshProUGUI GetTextBox() {
         return textBox;
-    }
-
-    public Button GetContinueButton()
-    {
-        return continueButotn;
     }
 }

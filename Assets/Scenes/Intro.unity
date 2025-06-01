@@ -273,7 +273,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7974200546604241187, guid: 7b483fa4b987fd6488b896d4e5cf4204, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6839363976052006611, guid: 7b483fa4b987fd6488b896d4e5cf4204, type: 3}
@@ -946,7 +946,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1095,13 +1095,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogueUI - I
       objectReference: {fileID: 0}
+    - target: {fileID: 2699081874892271492, guid: 7b483fa4b987fd6488b896d4e5cf4204, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 122.7538
+      objectReference: {fileID: 0}
+    - target: {fileID: 2699081874892271492, guid: 7b483fa4b987fd6488b896d4e5cf4204, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 25.2533
+      objectReference: {fileID: 0}
     - target: {fileID: 2928014664908180998, guid: 7b483fa4b987fd6488b896d4e5cf4204, type: 3}
       propertyPath: m_SizeDelta.x
       value: 543.62
       objectReference: {fileID: 0}
     - target: {fileID: 2928014664908180998, guid: 7b483fa4b987fd6488b896d4e5cf4204, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 51.7955
+      value: 118.63
       objectReference: {fileID: 0}
     - target: {fileID: 2928014664908180998, guid: 7b483fa4b987fd6488b896d4e5cf4204, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1109,7 +1117,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2928014664908180998, guid: 7b483fa4b987fd6488b896d4e5cf4204, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -6.1022
+      value: 27.315
       objectReference: {fileID: 0}
     - target: {fileID: 3227780824000300221, guid: 7b483fa4b987fd6488b896d4e5cf4204, type: 3}
       propertyPath: m_Pivot.x
@@ -1197,7 +1205,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7974200546604241187, guid: 7b483fa4b987fd6488b896d4e5cf4204, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

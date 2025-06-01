@@ -13,44 +13,60 @@ MonoBehaviour:
   m_Name: level0
   m_EditorClassIdentifier: 
   nodes:
-  - guid: 9bee988e-c0fe-4265-ab7e-131041e975cb
+  - guid: d0cba15c-e241-4442-b327-bac5d755f68c
     type: StartNode
     position: {x: 102, y: 122.666664}
     tagValue: 
     triggerValue: 
+    animatorValue: {fileID: 0}
     sceneName: 
     title: StartNode
-  - guid: 7ea8107e-459a-42d7-af8c-5212cd057e32
+  - guid: 522f1d86-3479-4d30-9715-5783d0d24dce
     type: NarrativeNode
     position: {x: 240.66667, y: 136.66667}
     tagValue: Scene0_1
     triggerValue: 
+    animatorValue: {fileID: 0}
     sceneName: 
     title: NarrativeNode
-  - guid: 8f5d1415-7b07-40c5-8577-acd0c02340c4
+  - guid: 0be0253d-2d06-4568-ac5f-3aec479f6900
     type: SceneTransitionNode
-    position: {x: 483.33334, y: 167.33334}
+    position: {x: 644.6667, y: 422.66666}
     tagValue: 
     triggerValue: 
+    animatorValue: {fileID: 0}
     sceneName: MainScene
     title: Scene Transition Node
-  - guid: 664cb484-3cd3-4336-b363-4a65e121f03c
+  - guid: 8f660aac-fce1-4b5e-acee-94e911ecfc1c
     type: EndNode
-    position: {x: 762, y: 173.33334}
+    position: {x: 970.6667, y: 262.66666}
     tagValue: 
     triggerValue: 
+    animatorValue: {fileID: 0}
     sceneName: 
     title: EndNode
+  - guid: 78b27129-60b2-4d6b-a659-8b0ce4008323
+    type: AnimationNode
+    position: {x: 456, y: 207.33334}
+    tagValue: 
+    triggerValue: StartBlackOut
+    animatorValue: {fileID: 0}
+    sceneName: 
+    title: Animation Node
   connections:
-  - fromNodeGuid: 9bee988e-c0fe-4265-ab7e-131041e975cb
+  - fromNodeGuid: d0cba15c-e241-4442-b327-bac5d755f68c
     fromPortName: Output
-    toNodeGuid: 7ea8107e-459a-42d7-af8c-5212cd057e32
+    toNodeGuid: 522f1d86-3479-4d30-9715-5783d0d24dce
     toPortName: Input
-  - fromNodeGuid: 7ea8107e-459a-42d7-af8c-5212cd057e32
+  - fromNodeGuid: 0be0253d-2d06-4568-ac5f-3aec479f6900
     fromPortName: Output
-    toNodeGuid: 8f5d1415-7b07-40c5-8577-acd0c02340c4
+    toNodeGuid: 8f660aac-fce1-4b5e-acee-94e911ecfc1c
     toPortName: Input
-  - fromNodeGuid: 8f5d1415-7b07-40c5-8577-acd0c02340c4
+  - fromNodeGuid: 522f1d86-3479-4d30-9715-5783d0d24dce
     fromPortName: Output
-    toNodeGuid: 664cb484-3cd3-4336-b363-4a65e121f03c
+    toNodeGuid: 78b27129-60b2-4d6b-a659-8b0ce4008323
+    toPortName: Input
+  - fromNodeGuid: 78b27129-60b2-4d6b-a659-8b0ce4008323
+    fromPortName: Output
+    toNodeGuid: 0be0253d-2d06-4568-ac5f-3aec479f6900
     toPortName: Input

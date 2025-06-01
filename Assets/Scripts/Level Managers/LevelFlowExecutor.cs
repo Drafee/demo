@@ -184,7 +184,7 @@ public class LevelFlowExecutor : MonoBehaviour
                 animator.SetTrigger(node.triggerValue);
 
                 // 等待动画完成（这里简化为固定时间，实际可以监听动画事件）
-                StartCoroutine(WaitForAnimationComplete(node, 3f));
+                // StartCoroutine(WaitForAnimationComplete(node, 3f));
             }
             else
             {
@@ -198,6 +198,10 @@ public class LevelFlowExecutor : MonoBehaviour
         }
     }
 
+    public void OnAnimationComplete() {
+        Debug.Log("runComplete");
+        MoveToNextNode(currentNode);
+    }
     private void ExecuteSceneTransitionNode(NodeData node)
     {
         // 执行场景切换
@@ -238,6 +242,7 @@ public class LevelFlowExecutor : MonoBehaviour
 
                 if (nodeMap.ContainsKey(nextNodeGuid))
                 {
+
                     ExecuteNode(nodeMap[nextNodeGuid]);
                 }
                 else
@@ -258,12 +263,6 @@ public class LevelFlowExecutor : MonoBehaviour
             Debug.LogError($"No connections found for node: {currentNode.guid}");
             StopFlow();
         }
-    }
-
-    private System.Collections.IEnumerator WaitForAnimationComplete(NodeData node, float duration)
-    {
-        yield return new WaitForSeconds(duration);
-        MoveToNextNode(node);
     }
 
     // 公共方法：手动继续到下一个节点（用于需要外部确认的情况）

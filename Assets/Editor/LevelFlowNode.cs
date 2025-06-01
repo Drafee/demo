@@ -1,8 +1,11 @@
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
+using UnityEditor.UIElements;
 using UnityEditor;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
+
 
 public abstract class BaseNode : Node
 {
@@ -94,19 +97,33 @@ public class NarrativeNode : BaseNode
 public class AnimationNode : BaseNode
 {
     public string TriggerName { get; private set; } = "";
+    public Animator TargetAnimator { get; private set; }
 
     public override void Draw()
     {
         base.Draw();
 
+        // Trigger ÎÄ±¾ÊäÈë¿ò
         var textField = new TextField("¶¯»­´¥·¢Æ÷:");
         textField.RegisterValueChangedCallback(evt =>
         {
             TriggerName = evt.newValue;
         });
         textField.SetValueWithoutNotify(TriggerName);
-
         mainContainer.Add(textField);
+
+        // Animator ÍÏ×§×Ö¶Î
+        var animatorField = new ObjectField("Animator")
+        {
+            objectType = typeof(Animator),
+            allowSceneObjects = true
+        };
+        animatorField.RegisterValueChangedCallback(evt =>
+        {
+            TargetAnimator = evt.newValue as Animator;
+        });
+        animatorField.SetValueWithoutNotify(TargetAnimator);
+        mainContainer.Add(animatorField);
     }
 
     public void SetTriggerName(string trigger)
@@ -118,7 +135,18 @@ public class AnimationNode : BaseNode
             textField.SetValueWithoutNotify(trigger);
         }
     }
+
+    public void SetAnimator(Animator animator)
+    {
+        TargetAnimator = animator;
+        var animatorField = mainContainer.Q<ObjectField>();
+        if (animatorField != null)
+        {
+            animatorField.SetValueWithoutNotify(animator);
+        }
+    }
 }
+
 
 public class SceneTransitionNode : BaseNode
 {

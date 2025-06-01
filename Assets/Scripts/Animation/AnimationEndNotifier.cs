@@ -2,15 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackoutEndNotifier : StateMachineBehaviour
+public class AnimationEndNotifier : StateMachineBehaviour
 {
-    public static System.Action OnBlackoutEnd;
-
-    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        Debug.Log("Blackout 动画播放完了");
-        OnBlackoutEnd?.Invoke();
-    }
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
@@ -28,7 +21,17 @@ public class BlackoutEndNotifier : StateMachineBehaviour
     //{
     //    
     //}
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        // 找到LevelController并调用回调
+        LevelFlowExecutor levelController = FindObjectOfType<LevelFlowExecutor>();
+        Debug.Log($"Animator find LevelFlowExecutor {levelController}");
+        if (levelController != null)
+        {
 
+            levelController.OnAnimationComplete();
+        }
+    }
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{

@@ -18,6 +18,7 @@ public class NodeData
     // 不同节点类型的特定数据
     public string tagValue;      // For NarrativeNode
     public string triggerValue;  // For AnimationNode  
+    public Animator animatorValue;  // For AnimationNode  
     public string sceneName;     // For SceneTransitionNode
     public string title;         // 节点标题
 }
