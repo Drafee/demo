@@ -87,6 +87,7 @@ public class LevelFlowEditor : EditorWindow
         var toolbar = new VisualElement();
 
         toolbar.style.flexDirection = FlexDirection.Row;
+        toolbar.style.flexWrap = Wrap.Wrap;
         toolbar.style.backgroundColor = new StyleColor(Color.gray);
         toolbar.style.paddingTop = 5;
         toolbar.style.paddingBottom = 5;
@@ -95,6 +96,7 @@ public class LevelFlowEditor : EditorWindow
         AddToolbarButton(toolbar, "Add Animation Node", NodeType.Animation);
         AddToolbarButton(toolbar, "Add Scene Transition Node", NodeType.SceneTransition);
         AddToolbarButton(toolbar, "Add Narrative Node", NodeType.Narrative);
+        AddToolbarButton(toolbar, "Add Audio Level Node", NodeType.AudioLevel);
 
         // Add a sagve button
         var saveButton = new Button(() =>
@@ -210,6 +212,10 @@ public class LevelFlowEditor : EditorWindow
                 var sceneNode = new SceneTransitionNode();
                 node = sceneNode;
                 break;
+            case "AudioLevelNode":
+                var audioNode = new AudioLevelNode();
+                node = audioNode;
+                break;
         }
 
         if (node != null)
@@ -231,6 +237,10 @@ public class LevelFlowEditor : EditorWindow
             else if (node is SceneTransitionNode sceneTransitionNode && !string.IsNullOrEmpty(nodeData.sceneName))
             {
                 sceneTransitionNode.SetSceneName(nodeData.sceneName);
+            }
+            else if (node is AudioLevelNode audioLevelNode)
+            {
+                audioLevelNode.SetAudioLevelData(nodeData.levelSetting);
             }
         }
 
@@ -330,6 +340,9 @@ public class LevelFlowGraphView : GraphView
             case NodeType.SceneTransition:
                 node = new SceneTransitionNode();
                 break;
+            case NodeType.AudioLevel:
+                node = new AudioLevelNode();
+                break;
             default:
                 Debug.LogWarning("Unsupported node type");
                 return;
@@ -371,6 +384,9 @@ public class LevelFlowGraphView : GraphView
 
             if (node is SceneTransitionNode sceneNode)
                 nodeData.sceneName = sceneNode.SceneName;
+
+            if (node is AudioLevelNode audioLevelNode)
+                nodeData.levelSetting = audioLevelNode.audioLevelSetting;
 
             asset.nodes.Add(nodeData);
         }
@@ -423,6 +439,9 @@ public class LevelFlowGraphView : GraphView
 
             if (node is SceneTransitionNode sceneNode)
                 nodeData.sceneName = sceneNode.SceneName;
+
+            if (node is AudioLevelNode audioLevelNode)
+                nodeData.levelSetting = audioLevelNode.audioLevelSetting;
 
             asset.nodes.Add(nodeData);
         }

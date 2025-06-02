@@ -21,6 +21,7 @@ public class NodeData
     public Animator animatorValue;  // For AnimationNode  
     public string sceneName;     // For SceneTransitionNode
     public string title;         // 节点标题
+    public AudioLevelSetting levelSetting;
 }
 
 [System.Serializable]

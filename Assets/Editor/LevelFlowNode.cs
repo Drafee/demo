@@ -197,64 +197,38 @@ public class SceneTransitionNode : BaseNode
         }
     }
 }
-/*
-public class SceneTransitionNode : BaseNode
+
+
+public class AudioLevelNode : BaseNode
 {
-    private PopupField<string> sceneDropdown;
-    private List<string> sceneNames;
-    private string selectedScene;
-
-    public string SceneName => selectedScene;
-
+    public AudioLevelSetting audioLevelSetting { get; private set; } = null;
     public override void Draw()
     {
         base.Draw();
+        title = "音频等级节点";
 
-        title = "Scene Transition Node";
-
-        // 获取 Build Settings 中的场景
-        sceneNames = EditorBuildSettings.scenes
-            .Where(s => s.enabled)
-            .Select(s => System.IO.Path.GetFileNameWithoutExtension(s.path))
-            .ToList();
-
-        if (sceneNames.Count == 0)
-            sceneNames.Add("No Scenes In Build Settings");
-
-        // 默认选择第一个
-        if (string.IsNullOrEmpty(selectedScene) || !sceneNames.Contains(selectedScene))
+        // ObjectField 选择 AudioLevelSetting
+        var soField = new ObjectField("音频设置")
         {
-            selectedScene = sceneNames[0];
-        }
+            objectType = typeof(AudioLevelSetting),
+            allowSceneObjects = false
+        };
 
-        // 创建下拉框
-        sceneDropdown = new PopupField<string>("目标场景", sceneNames, selectedScene);
-        sceneDropdown.RegisterValueChangedCallback(evt =>
+        soField.RegisterValueChangedCallback(evt =>
         {
-            selectedScene = evt.newValue;
+            audioLevelSetting = evt.newValue as AudioLevelSetting;
         });
 
-        extensionContainer.Add(sceneDropdown);
-
-        RefreshExpandedState();
-        RefreshPorts();
+        mainContainer.Add(soField);
     }
 
-
-
-    // 保存数据时使用
-    public override NodeData SaveData()
+    public void SetAudioLevelData(AudioLevelSetting a)
     {
-        var data = base.SaveData();
-        data.extraData = selectedScene;
-        return data;
-    }
-
-    // 加载数据时使用
-    public override void LoadData(NodeData data)
-    {
-        base.LoadData(data);
-        SetScene(data.extraData);
+        audioLevelSetting = a;
+        var audioLevelField = mainContainer.Q<ObjectField>();
+        if (audioLevelField != null)
+        {
+            audioLevelField.SetValueWithoutNotify(a);
+        }
     }
 }
-*/

@@ -22,10 +22,27 @@ public class LevelFlowExecutor : MonoBehaviour
     private NodeData currentNode;
     private bool isExecuting = false;
 
+    private string audioAnswer;
+    private Transform nextPlayerTr;
+
     // 执行状态
     public bool IsExecuting => isExecuting;
     public NodeData CurrentNode => currentNode;
+    public static LevelFlowExecutor Instance { get; private set; }
 
+    public List<CollectAudioClip> collectedAudioClips = new List<CollectAudioClip>();
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
+    }
     private void Start()
     {
         InitializeFlow();
@@ -126,6 +143,9 @@ public class LevelFlowExecutor : MonoBehaviour
             case "SceneTransitionNode":
                 ExecuteSceneTransitionNode(node);
                 break;
+            case "AudioLevelNode":
+                ExecuteAudioLevelNode(node);
+                break;
             default:
                 Debug.LogWarning($"Unknown node type: {node.type}");
                 MoveToNextNode(node);
@@ -178,13 +198,11 @@ public class LevelFlowExecutor : MonoBehaviour
         // 执行动画逻辑
         if (!string.IsNullOrEmpty(node.triggerValue))
         {
-            var animator = FindObjectOfType<Animator>();
+            var animator = node.animatorValue;
             if (animator != null)
             {
                 animator.SetTrigger(node.triggerValue);
-
-                // 等待动画完成（这里简化为固定时间，实际可以监听动画事件）
-                // StartCoroutine(WaitForAnimationComplete(node, 3f));
+                // Has call back function at the end of the animation
             }
             else
             {
@@ -224,6 +242,40 @@ public class LevelFlowExecutor : MonoBehaviour
         {
             Debug.LogWarning("SceneTransitionNode has no scene name specified!");
             MoveToNextNode(node);
+        }
+    }
+
+    private void ExecuteAudioLevelNode(NodeData node) {
+        GameManager.Instance.SetState(GameStateType.Dark);
+        audioAnswer = string.Join("", node.levelSetting.audioAnswer.Select(r => r.id));
+
+    }
+
+    public bool CheckAnswer(string a) {
+        if (a == audioAnswer) {
+            MoveToNextNode(currentNode);
+            return true;
+        }
+        return false;
+    }
+
+    public void AddAudioClip(RawAudioData rawAudio) {
+        collectedAudioClips.Add(new CollectAudioClip(rawAudio));
+    }
+
+    public void ClearAudioClip() { 
+        collectedAudioClips.Clear();
+    }
+
+    public void RemoveAudioClip(CollectAudioClip rawAudio) {
+        if (collectedAudioClips.Contains(rawAudio))
+        {
+            collectedAudioClips.Remove(rawAudio);
+            Debug.Log("Audio clip removed.");
+        }
+        else
+        {
+            Debug.LogWarning("Audio clip not found in the list.");
         }
     }
 

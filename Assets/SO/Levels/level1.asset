@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcb18a4b4045fb74cae4ba59286bbbf0, type: 3}
+  m_Name: level1
+  m_EditorClassIdentifier: 
+  nodes:
+  - guid: 5a7bda06-c9fb-4284-9bc8-d806de1c0019
+    type: StartNode
+    position: {x: 27.333334, y: 182.66667}
+    tagValue: 
+    triggerValue: 
+    animatorValue: {fileID: 0}
+    sceneName: 
+    title: Start Node
+    levelSetting: {fileID: 0}
+  - guid: cbf4e823-a986-4589-b656-f305c92471ab
+    type: SceneTransitionNode
+    position: {x: 343.33334, y: 309.3333}
+    tagValue: 
+    triggerValue: 
+    animatorValue: {fileID: 0}
+    sceneName: End
+    title: Scene Transition Node
+    levelSetting: {fileID: 0}
+  - guid: 5454c6b4-b466-4ffc-80b0-4049150c23d9
+    type: EndNode
+    position: {x: 602.6667, y: 429.3333}
+    tagValue: 
+    triggerValue: 
+    animatorValue: {fileID: 0}
+    sceneName: 
+    title: End Node
+    levelSetting: {fileID: 0}
+  - guid: fa9fc2ad-0409-4f87-8f23-9c50af419a58
+    type: AudioLevelNode
+    position: {x: 174, y: 192.66667}
+    tagValue: 
+    triggerValue: 
+    animatorValue: {fileID: 0}
+    sceneName: 
+    title: "\u97F3\u9891\u7B49\u7EA7\u8282\u70B9"
+    levelSetting: {fileID: 11400000, guid: ceb9d03ee7de5ab4587f408ff5b8488b, type: 2}
+  connections:
+  - fromNodeGuid: cbf4e823-a986-4589-b656-f305c92471ab
+    fromPortName: Output
+    toNodeGuid: 5454c6b4-b466-4ffc-80b0-4049150c23d9
+    toPortName: Input
+  - fromNodeGuid: 5a7bda06-c9fb-4284-9bc8-d806de1c0019
+    fromPortName: Output
+    toNodeGuid: fa9fc2ad-0409-4f87-8f23-9c50af419a58
+    toPortName: Input
+  - fromNodeGuid: fa9fc2ad-0409-4f87-8f23-9c50af419a58
+    fromPortName: Output
+    toNodeGuid: cbf4e823-a986-4589-b656-f305c92471ab
+    toPortName: Input
