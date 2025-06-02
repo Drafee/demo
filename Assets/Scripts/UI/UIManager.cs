@@ -11,6 +11,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject darkUIPanel;
     [SerializeField] private GameObject otherUIPanel;
 
+    [SerializeField] private GameObject pressFReminderPanel;
+    [SerializeField] private GameObject answerAreaPanel;
+
     private bool isDarkUIModeEnabled = false;
     private bool isDarkUIVisible = false;
 
@@ -34,6 +37,7 @@ public class UIManager : MonoBehaviour
     {
         if (isDarkUIModeEnabled && Input.GetKeyDown(KeyCode.Tab))
         {
+            Debug.Log(isDarkUIVisible);
             ToggleDarkUI();
         }
     }
@@ -54,6 +58,20 @@ public class UIManager : MonoBehaviour
         FreezePlayer();
     }
 
+    public void ShowPressFReminder() {
+        HideAllUI();
+        if (pressFReminderPanel != null)
+            pressFReminderPanel.SetActive(true);
+    }
+
+    public void ShowAnswerAreaPanel()
+    {
+        HideAllUI();
+        if (answerAreaPanel != null)
+            answerAreaPanel.SetActive(true);
+        FreezePlayer();
+    }
+
     public void ShowOtherUI()
     {
         HideAllUI();
@@ -66,6 +84,20 @@ public class UIManager : MonoBehaviour
     {
         if (lightUIPanel != null)
             lightUIPanel.SetActive(false);
+    }
+    public void HidePressFReminder()
+    {
+        if (pressFReminderPanel != null)
+            pressFReminderPanel.SetActive(false);
+    }
+
+    public void HideAnswerAreaPanel()
+    {
+        HideAllUI();
+        if (answerAreaPanel != null)
+            answerAreaPanel.SetActive(false);
+
+        ReleasePlayer();
     }
 
     public void HideDarkUI()
