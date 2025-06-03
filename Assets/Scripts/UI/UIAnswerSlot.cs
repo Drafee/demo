@@ -10,6 +10,8 @@ public class AnswerSlot : MonoBehaviour, IDropHandler, IBeginDragHandler, IDragH
     public Sprite currentSprite;
     public AudioAnswerPanelBag linkedBag; // 这个槽位对应的Bag物体（若是Bag拖回）
 
+    public UIAnswerArea uiAnswerarea;
+
     private Image bgImage;
     private Color normalColor = Color.white;
     private Color occupiedColor = new Color(0.7f, 0.9f, 1f);
@@ -25,6 +27,7 @@ public class AnswerSlot : MonoBehaviour, IDropHandler, IBeginDragHandler, IDragH
         rectTransform = GetComponent<RectTransform>();
 
         ClearSlot();
+        uiAnswerarea = FindObjectOfType<UIAnswerArea>();
     }
     /*
     public void SetClip(CollectAudioClip clip)
@@ -88,7 +91,11 @@ public class AnswerSlot : MonoBehaviour, IDropHandler, IBeginDragHandler, IDragH
 
             if (linkedBag != null) linkedBag.Hide();
             // if (tempBag != null) tempBag.Show();
+
         }
+
+        // uiAnswerarea.SaveAllSlots();
+        uiAnswerarea.CheckAnswer();
     }
 
 
@@ -113,6 +120,7 @@ public class AnswerSlot : MonoBehaviour, IDropHandler, IBeginDragHandler, IDragH
         DragIcon.Instance.Hide();
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
+
     }
 
     public void OnPointerEnter(PointerEventData eventData)

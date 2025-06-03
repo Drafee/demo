@@ -37,7 +37,6 @@ public class UIManager : MonoBehaviour
     {
         if (isDarkUIModeEnabled && Input.GetKeyDown(KeyCode.Tab))
         {
-            Debug.Log(isDarkUIVisible);
             ToggleDarkUI();
         }
     }

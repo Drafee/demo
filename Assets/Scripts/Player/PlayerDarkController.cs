@@ -36,11 +36,8 @@ public class PlayerDarkController : MonoBehaviour
         if (canMove) {
             HandleMouseLook();
             HandleMovement();
-            HandleAbsorb(); // ÐÂÔö
+            HandleAbsorb();
         }
-
-
-
     }
 
     void HandleMouseLook()

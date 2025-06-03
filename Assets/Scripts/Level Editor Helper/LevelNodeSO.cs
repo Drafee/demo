@@ -22,6 +22,7 @@ public class NodeData
     public string sceneName;     // For SceneTransitionNode
     public string title;         // 节点标题
     public AudioLevelSetting levelSetting;
+    public AnimationSequencePlayer animationSequencePlayer;
 }
 
 [System.Serializable]

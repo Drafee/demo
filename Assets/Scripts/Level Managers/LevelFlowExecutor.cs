@@ -22,7 +22,7 @@ public class LevelFlowExecutor : MonoBehaviour
     private NodeData currentNode;
     private bool isExecuting = false;
 
-    private string audioAnswer;
+    public string audioAnswer;
     private Transform nextPlayerTr;
 
     // Ö´ÐÐ×´Ì¬

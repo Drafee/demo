@@ -147,6 +147,41 @@ public class AnimationNode : BaseNode
     }
 }
 
+public class AnimationScriptNode : BaseNode
+{
+    public AnimationSequencePlayer animationSequencePlayer;
+
+    public override void Draw()
+    {
+        base.Draw();
+
+
+        // Animator ÍÏ×§×Ö¶Î
+        var animatorScriptField = new ObjectField("¶¯»­½Å±¾")
+        {
+            objectType = typeof(AnimationSequencePlayer),
+            allowSceneObjects = true
+        };
+        animatorScriptField.RegisterValueChangedCallback(evt =>
+        {
+            animationSequencePlayer = evt.newValue as AnimationSequencePlayer;
+        });
+        animatorScriptField.SetValueWithoutNotify(animationSequencePlayer);
+        mainContainer.Add(animatorScriptField);
+    }
+
+    public void SetAnimationScript(AnimationSequencePlayer a)
+    {
+        animationSequencePlayer = a;
+        var animatorScriptField = mainContainer.Q<ObjectField>();
+        if (animatorScriptField != null)
+        {
+            animatorScriptField.SetValueWithoutNotify(a);
+        }
+    }
+}
+
+
 
 public class SceneTransitionNode : BaseNode
 {

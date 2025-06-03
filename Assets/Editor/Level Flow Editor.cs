@@ -94,6 +94,7 @@ public class LevelFlowEditor : EditorWindow
 
         AddToolbarButton(toolbar, "Add Dialogue Node", NodeType.Dialogue);
         AddToolbarButton(toolbar, "Add Animation Node", NodeType.Animation);
+        AddToolbarButton(toolbar, "Add Animation Script Node", NodeType.AnimationScript);
         AddToolbarButton(toolbar, "Add Scene Transition Node", NodeType.SceneTransition);
         AddToolbarButton(toolbar, "Add Narrative Node", NodeType.Narrative);
         AddToolbarButton(toolbar, "Add Audio Level Node", NodeType.AudioLevel);
@@ -208,6 +209,10 @@ public class LevelFlowEditor : EditorWindow
                 var animationNode = new AnimationNode();
                 node = animationNode;
                 break;
+            case "AnimationScriptNode":
+                var animationScriptNode = new AnimationScriptNode();
+                node = animationScriptNode;
+                break;
             case "SceneTransitionNode":
                 var sceneNode = new SceneTransitionNode();
                 node = sceneNode;
@@ -241,6 +246,10 @@ public class LevelFlowEditor : EditorWindow
             else if (node is AudioLevelNode audioLevelNode)
             {
                 audioLevelNode.SetAudioLevelData(nodeData.levelSetting);
+            }
+            else if (node is AnimationScriptNode animationScriptNode)
+            {
+                animationScriptNode.SetAnimationScript(nodeData.animationSequencePlayer);
             }
         }
 
@@ -343,6 +352,9 @@ public class LevelFlowGraphView : GraphView
             case NodeType.AudioLevel:
                 node = new AudioLevelNode();
                 break;
+            case NodeType.AnimationScript:
+                node = new AnimationScriptNode();
+                break;
             default:
                 Debug.LogWarning("Unsupported node type");
                 return;
@@ -387,6 +399,9 @@ public class LevelFlowGraphView : GraphView
 
             if (node is AudioLevelNode audioLevelNode)
                 nodeData.levelSetting = audioLevelNode.audioLevelSetting;
+
+            if (node is AnimationScriptNode animationScriptNode)
+                nodeData.animationSequencePlayer = animationScriptNode.animationSequencePlayer;
 
             asset.nodes.Add(nodeData);
         }
@@ -442,6 +457,9 @@ public class LevelFlowGraphView : GraphView
 
             if (node is AudioLevelNode audioLevelNode)
                 nodeData.levelSetting = audioLevelNode.audioLevelSetting;
+
+            if (node is AnimationScriptNode animationScriptNode)
+                nodeData.animationSequencePlayer = animationScriptNode.animationSequencePlayer;
 
             asset.nodes.Add(nodeData);
         }

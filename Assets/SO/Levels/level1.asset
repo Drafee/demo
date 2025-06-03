@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: level1
   m_EditorClassIdentifier: 
   nodes:
-  - guid: 5a7bda06-c9fb-4284-9bc8-d806de1c0019
+  - guid: 874a90af-b736-46b7-9e25-8a50ba3c34be
     type: StartNode
     position: {x: 27.333334, y: 182.66667}
     tagValue: 
@@ -22,43 +22,87 @@ MonoBehaviour:
     sceneName: 
     title: Start Node
     levelSetting: {fileID: 0}
-  - guid: cbf4e823-a986-4589-b656-f305c92471ab
-    type: SceneTransitionNode
-    position: {x: 343.33334, y: 309.3333}
-    tagValue: 
-    triggerValue: 
-    animatorValue: {fileID: 0}
-    sceneName: End
-    title: Scene Transition Node
-    levelSetting: {fileID: 0}
-  - guid: 5454c6b4-b466-4ffc-80b0-4049150c23d9
-    type: EndNode
-    position: {x: 602.6667, y: 429.3333}
-    tagValue: 
-    triggerValue: 
-    animatorValue: {fileID: 0}
-    sceneName: 
-    title: End Node
-    levelSetting: {fileID: 0}
-  - guid: fa9fc2ad-0409-4f87-8f23-9c50af419a58
+  - guid: e83dcf50-f138-4d96-a048-45b8a4d82280
     type: AudioLevelNode
-    position: {x: 174, y: 192.66667}
+    position: {x: 178, y: 182.66667}
     tagValue: 
     triggerValue: 
     animatorValue: {fileID: 0}
     sceneName: 
     title: "\u97F3\u9891\u7B49\u7EA7\u8282\u70B9"
     levelSetting: {fileID: 11400000, guid: ceb9d03ee7de5ab4587f408ff5b8488b, type: 2}
+  - guid: 707b1e0c-e6ec-4f00-87fd-7a28632ae70f
+    type: AudioLevelNode
+    position: {x: 176, y: 323.3333}
+    tagValue: 
+    triggerValue: 
+    animatorValue: {fileID: 0}
+    sceneName: 
+    title: "\u97F3\u9891\u7B49\u7EA7\u8282\u70B9"
+    levelSetting: {fileID: 11400000, guid: b97776c956c94564dbf2bde36990dc33, type: 2}
+  - guid: 767743dd-367e-4230-ada8-c12aafd3abaf
+    type: AudioLevelNode
+    position: {x: 176, y: 452}
+    tagValue: 
+    triggerValue: 
+    animatorValue: {fileID: 0}
+    sceneName: 
+    title: "\u97F3\u9891\u7B49\u7EA7\u8282\u70B9"
+    levelSetting: {fileID: 11400000, guid: f361e161577aaef48832c87c3df5e1e8, type: 2}
+  - guid: ed66788d-6610-4d3d-a381-f8fe60321600
+    type: AnimationNode
+    position: {x: 564, y: 182.66667}
+    tagValue: 
+    triggerValue: 
+    animatorValue: {fileID: 0}
+    sceneName: 
+    title: Animation Node
+    levelSetting: {fileID: 0}
+  - guid: f8546904-f2ff-43dd-9b80-0c34028b9383
+    type: AnimationNode
+    position: {x: 564, y: 323.3333}
+    tagValue: 
+    triggerValue: 
+    animatorValue: {fileID: 0}
+    sceneName: 
+    title: Animation Node
+    levelSetting: {fileID: 0}
+  - guid: 50ac8a14-8974-4046-94d9-1836b4e558a3
+    type: AnimationNode
+    position: {x: 564, y: 452}
+    tagValue: 
+    triggerValue: 
+    animatorValue: {fileID: 0}
+    sceneName: 
+    title: Animation Node
+    levelSetting: {fileID: 0}
+  - guid: 7323c5a1-7308-481f-b4b6-63ca7f77f20d
+    type: EndNode
+    position: {x: 902, y: 452}
+    tagValue: 
+    triggerValue: 
+    animatorValue: {fileID: 0}
+    sceneName: 
+    title: End Node
+    levelSetting: {fileID: 0}
   connections:
-  - fromNodeGuid: cbf4e823-a986-4589-b656-f305c92471ab
+  - fromNodeGuid: 874a90af-b736-46b7-9e25-8a50ba3c34be
     fromPortName: Output
-    toNodeGuid: 5454c6b4-b466-4ffc-80b0-4049150c23d9
+    toNodeGuid: e83dcf50-f138-4d96-a048-45b8a4d82280
     toPortName: Input
-  - fromNodeGuid: 5a7bda06-c9fb-4284-9bc8-d806de1c0019
+  - fromNodeGuid: e83dcf50-f138-4d96-a048-45b8a4d82280
     fromPortName: Output
-    toNodeGuid: fa9fc2ad-0409-4f87-8f23-9c50af419a58
+    toNodeGuid: ed66788d-6610-4d3d-a381-f8fe60321600
     toPortName: Input
-  - fromNodeGuid: fa9fc2ad-0409-4f87-8f23-9c50af419a58
+  - fromNodeGuid: 707b1e0c-e6ec-4f00-87fd-7a28632ae70f
     fromPortName: Output
-    toNodeGuid: cbf4e823-a986-4589-b656-f305c92471ab
+    toNodeGuid: f8546904-f2ff-43dd-9b80-0c34028b9383
+    toPortName: Input
+  - fromNodeGuid: 767743dd-367e-4230-ada8-c12aafd3abaf
+    fromPortName: Output
+    toNodeGuid: 50ac8a14-8974-4046-94d9-1836b4e558a3
+    toPortName: Input
+  - fromNodeGuid: 50ac8a14-8974-4046-94d9-1836b4e558a3
+    fromPortName: Output
+    toNodeGuid: 7323c5a1-7308-481f-b4b6-63ca7f77f20d
     toPortName: Input
