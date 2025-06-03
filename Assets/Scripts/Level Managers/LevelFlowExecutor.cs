@@ -23,7 +23,8 @@ public class LevelFlowExecutor : MonoBehaviour
     private bool isExecuting = false;
 
     public string audioAnswer;
-    private Transform nextPlayerTr;
+    public Transform playerTransformWhite;
+    public Transform playerTransformBlack;
 
     // Ö´ÐÐ×´Ì¬
     public bool IsExecuting => isExecuting;
@@ -140,6 +141,9 @@ public class LevelFlowExecutor : MonoBehaviour
             case "AnimationNode":
                 ExecuteAnimationNode(node);
                 break;
+            case "AnimationScriptNode":
+                ExecuteAnimationScriptNode(node);
+                break;
             case "SceneTransitionNode":
                 ExecuteSceneTransitionNode(node);
                 break;
@@ -214,6 +218,14 @@ public class LevelFlowExecutor : MonoBehaviour
         {
             MoveToNextNode(node);
         }
+    }
+
+    private void ExecuteAnimationScriptNode(NodeData node) {
+        node.animationSequencePlayer.PlaySequence();
+    }
+
+    public void OnSequenceComplete() {
+        MoveToNextNode(currentNode);
     }
 
     public void OnAnimationComplete() {

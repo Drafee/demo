@@ -27,7 +27,7 @@ public class PlayerMovementSwitcher : MonoBehaviour
     }
     public void SwitchToFPS(Transform spawnPoint)
     {
-        // MovePlayer(fpsController, spawnPoint);
+        MovePlayer(fpsController, spawnPoint);
         fpsController.SetActive(true);
         simpleMoveController.SetActive(false);
         currentController = fpsController;
@@ -35,7 +35,9 @@ public class PlayerMovementSwitcher : MonoBehaviour
 
     public void SwitchToSimple(Transform spawnPoint)
     {
-        // MovePlayer(simpleMoveController, spawnPoint);
+        Debug.Log("Switch to sIMPLE");
+        Debug.Log(spawnPoint);
+        MovePlayer(simpleMoveController, spawnPoint);
         simpleMoveController.SetActive(true);
         fpsController.SetActive(false);
         currentController = simpleMoveController;
@@ -45,6 +47,10 @@ public class PlayerMovementSwitcher : MonoBehaviour
     {
         controller.transform.position = spawnPoint.position;
         controller.transform.rotation = spawnPoint.rotation;
+    }
+
+    public Transform GetCurrentPlayerTransform() {
+        return currentController.transform;
     }
 
     public void FreezeMove() {
