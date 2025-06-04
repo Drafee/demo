@@ -24,6 +24,13 @@ public class WhitePortalTransition : AnimationSequencePlayer
     public float playerWalkDuration = 2f;
     public float fadeDuration = 1f;
 
+    public List<GameObject> blockers;
+    public List<GameObject> volumetricLight;
+    public Light spotLight;
+    public Light derectionalLight;
+    public Material skybox;
+    public GameObject endNote;
+
     protected override void StartSequence()
     {
         Debug.Log("StartSequence 执行了");
@@ -51,6 +58,7 @@ public class WhitePortalTransition : AnimationSequencePlayer
         {
             Debug.Log("Step 0: 冻结玩家控制");
             PlayerMovementSwitcher.Instance.FreezeMove();
+            UIManager.Instance.HidePressFReminder();
         });
 
         // 1. 闭合上下 Bar
@@ -86,9 +94,52 @@ public class WhitePortalTransition : AnimationSequencePlayer
         {
             Debug.Log("Step 5: 恢复玩家控制");
             PlayerMovementSwitcher.Instance.ReleaseMove();
+            UpdateLevel();
         });
     }
 
+    public void UpdateLevel() {
+
+        int currentLevel = LevelFlowExecutor.Instance.currentLevel;
+
+        switch (currentLevel)
+        {
+            case 1:
+                volumetricLight[currentLevel - 1].SetActive(true);
+                blockers[currentLevel - 1].SetActive(false);
+                Debug.Log("Directional Light: " + derectionalLight);
+                Debug.Log("Spot Light: " + spotLight);
+                derectionalLight.intensity = 0.2f;
+                spotLight.range = 10f;
+                break;
+
+            case 2:
+                blockers[currentLevel - 1].SetActive(false);
+                volumetricLight[currentLevel - 1].SetActive(true);
+                derectionalLight.intensity = 0.6f;
+                spotLight.range = 105f;
+                break;
+
+            case 3:
+                volumetricLight[currentLevel - 1].SetActive(true);
+                derectionalLight.intensity = 0.8f;
+                Camera playerCamera = PlayerMovementSwitcher.Instance.GetCurrentPlayerTransform().GetComponentInChildren<Camera>();
+
+                if (playerCamera != null)
+                {
+                    playerCamera.clearFlags = CameraClearFlags.Skybox;
+                    RenderSettings.skybox = skybox;
+                    DynamicGI.UpdateEnvironment();
+                }
+
+                endNote.SetActive(true);
+                break;
+
+            default:
+                Debug.LogWarning("未知关卡：" + currentLevel);
+                break;
+        }
+    }
     [ContextMenu("Test Portal Sequence")]
     public void TestPortalSequence()
     {

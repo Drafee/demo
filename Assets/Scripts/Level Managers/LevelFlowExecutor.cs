@@ -210,7 +210,7 @@ public class LevelFlowExecutor : MonoBehaviour
         // Ö´ÐÐ¶¯»­Âß¼­
         if (!string.IsNullOrEmpty(node.triggerValue))
         {
-            var animator = node.animatorValue;
+            Animator animator = node.animatorValue;
             if (animator != null)
             {
                 animator.SetTrigger(node.triggerValue);
@@ -218,6 +218,10 @@ public class LevelFlowExecutor : MonoBehaviour
             }
             else
             {
+
+                animator = FindAnyObjectByType<Animator>();
+                Debug.Log(animator);
+                animator.SetTrigger(node.triggerValue);
                 Debug.Log($"Animation Trigger: {node.triggerValue}");
                 MoveToNextNode(node);
             }
@@ -230,7 +234,24 @@ public class LevelFlowExecutor : MonoBehaviour
 
     private void ExecuteAnimationScriptNode(NodeData node) {
         Debug.Log(node);
-        node.animationSequencePlayer.PlaySequence();
+        AnimationSequencePlayer player;
+        if (node.animationSequencePlayer == null)
+        {
+            if (PlayerMovementSwitcher.Instance.isFPSPlayer())
+            {
+                player = FindAnyObjectByType<PortalTransition>();
+
+            }
+            else {
+                player = FindAnyObjectByType<WhitePortalTransition>();
+            }
+
+        }
+        else {
+
+            player = node.animationSequencePlayer;
+        }
+        player.PlaySequence();
     }
 
     public void OnSequenceComplete() {

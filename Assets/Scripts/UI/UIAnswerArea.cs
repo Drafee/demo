@@ -18,43 +18,13 @@ public class UIAnswerArea : MonoBehaviour
     public List<GameObject> slotContainer;
     bool result;
 
-    /*
-        public void SaveAllSlots()
-        {
-        for (int i = 0; i < allSlots.Length; i++)
-        {
-            var slot = allSlots[i];
-            string clipId = slot.currentAudioClipItem != null ? slot.currentAudioClipItem.collectAudioClip.audioData.id: "";
-            PlayerPrefs.SetString($"Slot_{i}", clipId);
-        }
-        PlayerPrefs.Save();
-        }
-        private void RestoreSlots()
-        {
-
-        foreach (var slot in allSlots)
-        {
-            slot.ClearSlot();
-        }
-
-        foreach (var clip in collectedAudioClipList)
-        {
-            for (int i = 0; i < allSlots.Length; i++)
-            {
-                string savedClipId = PlayerPrefs.GetString($"Slot_{i}", "");
-                if (!string.IsNullOrEmpty(savedClipId) && savedClipId == clip.audioData.id)
-                {
-                    allSlots[i].SetClip(clip); // 自定义方法：设置 clip、更新 UI
-                }
-            }
-        }
-
-        }
-    */
+    private AudioSource audioSource;
+    private Coroutine playRoutine;
     private void Start()
     {
         // gameObject.SetActive(false);
         result = false;
+        audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     private void OnEnable()
@@ -146,5 +116,37 @@ public class UIAnswerArea : MonoBehaviour
             UIManager.Instance.HideAnswerAreaPanel();
             result = false;
         }
+    }
+
+    public void PlayOrStopSlotClips()
+    {
+        if (playRoutine != null)
+        {
+            StopCoroutine(playRoutine);
+            playRoutine = null;
+            audioSource.Stop();
+            return;
+        }
+
+        playRoutine = StartCoroutine(PlayAllSlotAudioSequentially());
+    }
+    private IEnumerator PlayAllSlotAudioSequentially()
+    {
+        foreach (var slot in currentAllSlots)
+        {
+            if (slot.currentAudioClipItem == null ||
+                slot.currentAudioClipItem.collectAudioClip == null ||
+                slot.currentAudioClipItem.collectAudioClip.audioData == null ||
+                slot.currentAudioClipItem.collectAudioClip.audioData.audioClip == null)
+                continue;
+
+            AudioClip clip = slot.currentAudioClipItem.collectAudioClip.audioData.audioClip;
+
+            audioSource.clip = clip;
+            audioSource.Play();
+            yield return new WaitWhile(() => audioSource.isPlaying);
+        }
+
+        playRoutine = null;
     }
 }

@@ -27,6 +27,8 @@ public class PortalTransition : AnimationSequencePlayer
     public float playerWalkDuration = 2f;
     public float fadeDuration = 1f;
 
+
+
     protected override void StartSequence()
     {
         Sequence seq = DOTween.Sequence();

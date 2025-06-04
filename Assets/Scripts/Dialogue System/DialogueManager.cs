@@ -64,6 +64,9 @@ public class DialogueManager : MonoBehaviour
     private int direction = 1; // ”√”⁄◊Û”“ΩªÃÊ
     private GameObject door;
 
+
+    public bool hasTriggeredFDialogue = false;
+
     public void StartDialogueWhiteArea(string dialogueTag) {
         Debug.Log("Start Talking");
         playerCamera = PlayerMovementSwitcher.Instance.GetCurrentPlayerTransform();
@@ -189,7 +192,7 @@ public class DialogueManager : MonoBehaviour
         if (continueButton != null)
             continueButton.onClick.AddListener(OnContinueClicked);
 
-        Invoke(nameof(InvokeStartDialogue), 1f);
+
     }
 
     void InvokeStartDialogue()
@@ -205,7 +208,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        // DontDestroyOnLoad(gameObject);
 
         LoadAllDialogues();
 
@@ -216,6 +219,8 @@ public class DialogueManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         AutoCollectUIs();
+        if (SceneManager.GetActiveScene().name == "MainScene")
+            Invoke(nameof(InvokeStartDialogue), 1f);
     }
     private void OnDestroy()
     {

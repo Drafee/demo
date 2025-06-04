@@ -83,4 +83,8 @@ public class PlayerMovementSwitcher : MonoBehaviour
             currentController.GetComponent<PlayerLightController>().EnablePlayerMove();
         }
     }
+
+    public bool isFPSPlayer() { 
+        return currentController == fpsController;
+    }
 }

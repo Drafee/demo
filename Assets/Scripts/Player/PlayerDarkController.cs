@@ -24,6 +24,7 @@ public class PlayerDarkController : MonoBehaviour
     public float absorbAngle = 30f;   // 最大吸收夹角
     public string absorbableTag = "AudioClip"; // 目标Tag
     public GameObject successAudioAnimation;
+    public AudioClip successAudio;
 
     private bool canMove = true;
     void Start()
@@ -103,6 +104,7 @@ public class PlayerDarkController : MonoBehaviour
                 // 命中可吸收音源
                 Debug.Log("吸收音源: " + collider.name);
                 collider.gameObject.GetComponent<AudioIndicator>().OnAbsorbed();
+                AudioPoolManager.Instance.PlaySound(successAudio, this.transform.position);
                 successAudioAnimation.SetActive(true);
                 return;
             }

@@ -154,4 +154,9 @@ public class UIManager : MonoBehaviour
         PlayerMovementSwitcher.Instance.ReleaseMove();
 
     }
+
+    public bool IsAnswerAreaPanelVisible()
+    {
+        return answerAreaPanel != null && answerAreaPanel.activeSelf;
+    }
 }
