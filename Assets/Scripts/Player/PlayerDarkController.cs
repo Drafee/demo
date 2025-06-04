@@ -23,6 +23,7 @@ public class PlayerDarkController : MonoBehaviour
     public float absorbDistance = 3f; // 最大吸收距离
     public float absorbAngle = 30f;   // 最大吸收夹角
     public string absorbableTag = "AudioClip"; // 目标Tag
+    public GameObject successAudioAnimation;
 
     private bool canMove = true;
     void Start()
@@ -78,7 +79,7 @@ public class PlayerDarkController : MonoBehaviour
 
     void HandleAbsorb()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.C))
         {
             TryAbsorb();
         }
@@ -102,6 +103,7 @@ public class PlayerDarkController : MonoBehaviour
                 // 命中可吸收音源
                 Debug.Log("吸收音源: " + collider.name);
                 collider.gameObject.GetComponent<AudioIndicator>().OnAbsorbed();
+                successAudioAnimation.SetActive(true);
                 return;
             }
         }
@@ -109,6 +111,10 @@ public class PlayerDarkController : MonoBehaviour
         Debug.Log("附近没有可吸收的音源");
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(collision.gameObject.name);
+    }
     public void EnablePlayerMove()
     {
         canMove = true;

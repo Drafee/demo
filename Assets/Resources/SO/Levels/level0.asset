@@ -13,60 +13,75 @@ MonoBehaviour:
   m_Name: level0
   m_EditorClassIdentifier: 
   nodes:
-  - guid: d0cba15c-e241-4442-b327-bac5d755f68c
+  - guid: 9e8e822e-fb55-45fc-ab2c-764657c5e4c0
     type: StartNode
     position: {x: 102, y: 122.666664}
     tagValue: 
+    isBrightArea: 0
     triggerValue: 
     animatorValue: {fileID: 0}
     sceneName: 
     title: StartNode
-  - guid: 522f1d86-3479-4d30-9715-5783d0d24dce
+    levelSetting: {fileID: 0}
+    animationSequencePlayer: {fileID: 0}
+  - guid: 5514b4f8-1309-4934-81a5-e7256175c178
     type: NarrativeNode
     position: {x: 240.66667, y: 136.66667}
     tagValue: Scene0_1
+    isBrightArea: 0
     triggerValue: 
     animatorValue: {fileID: 0}
     sceneName: 
     title: NarrativeNode
-  - guid: 0be0253d-2d06-4568-ac5f-3aec479f6900
+    levelSetting: {fileID: 0}
+    animationSequencePlayer: {fileID: 0}
+  - guid: 1e62e730-74c3-4fd6-ad88-b81ea1361f92
     type: SceneTransitionNode
     position: {x: 644.6667, y: 422.66666}
     tagValue: 
+    isBrightArea: 0
     triggerValue: 
     animatorValue: {fileID: 0}
     sceneName: MainScene
     title: Scene Transition Node
-  - guid: 8f660aac-fce1-4b5e-acee-94e911ecfc1c
+    levelSetting: {fileID: 0}
+    animationSequencePlayer: {fileID: 0}
+  - guid: 00cd3bf0-f5b2-42a4-b117-04d58bb1c724
     type: EndNode
     position: {x: 970.6667, y: 262.66666}
     tagValue: 
+    isBrightArea: 0
     triggerValue: 
     animatorValue: {fileID: 0}
     sceneName: 
     title: EndNode
-  - guid: 78b27129-60b2-4d6b-a659-8b0ce4008323
+    levelSetting: {fileID: 0}
+    animationSequencePlayer: {fileID: 0}
+  - guid: 176fdbb3-17b3-4351-9151-ffafebb6e4ae
     type: AnimationNode
     position: {x: 456, y: 207.33334}
     tagValue: 
+    isBrightArea: 0
     triggerValue: StartBlackOut
     animatorValue: {fileID: 0}
     sceneName: 
     title: Animation Node
+    levelSetting: {fileID: 0}
+    animationSequencePlayer: {fileID: 0}
   connections:
-  - fromNodeGuid: d0cba15c-e241-4442-b327-bac5d755f68c
+  - fromNodeGuid: 9e8e822e-fb55-45fc-ab2c-764657c5e4c0
     fromPortName: Output
-    toNodeGuid: 522f1d86-3479-4d30-9715-5783d0d24dce
+    toNodeGuid: 5514b4f8-1309-4934-81a5-e7256175c178
     toPortName: Input
-  - fromNodeGuid: 0be0253d-2d06-4568-ac5f-3aec479f6900
+  - fromNodeGuid: 1e62e730-74c3-4fd6-ad88-b81ea1361f92
     fromPortName: Output
-    toNodeGuid: 8f660aac-fce1-4b5e-acee-94e911ecfc1c
+    toNodeGuid: 00cd3bf0-f5b2-42a4-b117-04d58bb1c724
     toPortName: Input
-  - fromNodeGuid: 522f1d86-3479-4d30-9715-5783d0d24dce
+  - fromNodeGuid: 5514b4f8-1309-4934-81a5-e7256175c178
     fromPortName: Output
-    toNodeGuid: 78b27129-60b2-4d6b-a659-8b0ce4008323
+    toNodeGuid: 176fdbb3-17b3-4351-9151-ffafebb6e4ae
     toPortName: Input
-  - fromNodeGuid: 78b27129-60b2-4d6b-a659-8b0ce4008323
+  - fromNodeGuid: 176fdbb3-17b3-4351-9151-ffafebb6e4ae
     fromPortName: Output
-    toNodeGuid: 0be0253d-2d06-4568-ac5f-3aec479f6900
+    toNodeGuid: 1e62e730-74c3-4fd6-ad88-b81ea1361f92
     toPortName: Input

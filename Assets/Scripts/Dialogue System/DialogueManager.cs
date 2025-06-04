@@ -102,6 +102,7 @@ public class DialogueManager : MonoBehaviour
         door = Instantiate(Exit, playerCamera.position + playerCamera.forward * 15f + Vector3.up, Quaternion.identity);
         ShowSelectionButtons();
     }
+    private bool hasPlayedAutoDialogue = false;
 
     void ShowSelectionButtons()
     {
@@ -136,6 +137,11 @@ public class DialogueManager : MonoBehaviour
             Debug.Log(line.text);
             string capturedLine = line.text;
             btn.onClick.AddListener(() => OnSelectLine(capturedLine, btnObj));
+        }
+        if (!hasPlayedAutoDialogue)
+        {
+            DialogueManager.Instance.StartDialogue("Tutorial_pick");
+            hasPlayedAutoDialogue = true;
         }
     }
 
@@ -182,6 +188,13 @@ public class DialogueManager : MonoBehaviour
 
         if (continueButton != null)
             continueButton.onClick.AddListener(OnContinueClicked);
+
+        Invoke(nameof(InvokeStartDialogue), 1f);
+    }
+
+    void InvokeStartDialogue()
+    {
+        StartDialogue("Tutorial_initial_check");
     }
     void Awake()
     {
@@ -269,6 +282,10 @@ public class DialogueManager : MonoBehaviour
     }
     public void StartDialogue(string dialogueTag, Action onComplete = null)
     {
+        if (PlayerMovementSwitcher.Instance != null) {
+            PlayerMovementSwitcher.Instance.FreezeMove();
+            Debug.Log("Freeze Player Move"); 
+        }
         var dialogue = GetDialogueByTag(dialogueTag);
         if (dialogue == null || dialogue.lines == null || dialogue.lines.Count == 0)
         {
@@ -348,6 +365,10 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
+        if (PlayerMovementSwitcher.Instance != null)
+        {
+            PlayerMovementSwitcher.Instance.ReleaseMove();
+        }
         if (continueButton != null)
             continueButton.gameObject.SetActive(false);
         isDialogueActive = false;

@@ -1,9 +1,12 @@
 Tag,Speaker,Content,AudioClip
-Scene0_1,I,...,
-Scene0_1,audience,医生！,
-Scene0_1,audience,医生！你一定要救救她！,
-Scene0_1,I,作为一名精神分析师，这是我的职责，请保持安静，耐心等待，等我重聚她的意念，自然就能醒过来了,
-Scene0_1,I,那咋们治疗开始吧,
+Scene0_1,Audience,她昏迷已经三天了。,
+Scene0_1,Audience,"""医生，您是我们最后的希望""",
+Scene0_1,I,我不是普通的医生。,
+Scene0_1,I,我是个催眠师，专门进入别人的潜意识，把他们从记忆的深渊里拉出来。,
+Scene0_1,I,我要做的，是收集那些被压抑、被藏起来的声音碎片，把它们拼回原来的样子。,
+Scene0_1,I,每一段记忆的背后，都藏着一点点线索，指向一个她快要忘记的温暖时刻。,
+Scene0_1,I,我得找到它们，拼对它们，然后——带她回来。,
+Scene0_1,I,开始吧,
 ,,,
 Scene1_1,I,我经常一个人，安静地躺在屋子的角落里。,1-1
 Scene1_1,I,那时候我还不会说话，只会轻轻地哭。,1-1
@@ -43,3 +46,23 @@ Scene1_3,I,她帮我捡起书本，扶我站起来。,3-5
 Scene1_3,I,也许，她会成为朋友。,3-5
 Scene1_3,I,世界变得安静。,3-6
 Scene1_3,I,风吹过，树叶沙沙响。,3-6
+,,,
+Other ,I,按[F]检查,
+Other ,I,当距离记忆碎片比较近时，按 [C] 吸收记忆碎片,
+,,,
+Tutorial_initial_check,I,……这里就是她的潜意识吗？,
+Tutorial_initial_check,I,好黑……几乎什么都看不清,
+Tutorial_initial_check,I,那边……,
+Tutorial_initial_check,I,是她吗?,
+,,,
+Tutorial_initial_audio,I,……嗯？,
+Tutorial_initial_audio,I,我好像听到了什么声音……,
+Tutorial_initial_audio,I,那些记忆……就在附近……在呼唤我……,
+,,,
+Tutorial_pedastal,I,哦……这里就是她的记忆拼图中心了。,
+Tutorial_pedastal,I,每一块碎片，都是这段记忆的一部分。,
+Tutorial_pedastal,I,我要试着把它们拼回原来的样子，还原那天，到底发生了什么。,
+,,,
+Tutorial_pick,I,好沉重的故事……,
+Tutorial_pick,I,也许，有一句话……能照进她的心里。,
+Tutorial_pick,I,让我试试，哪一句话，,

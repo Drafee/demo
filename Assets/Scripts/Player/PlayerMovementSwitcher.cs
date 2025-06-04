@@ -31,6 +31,7 @@ public class PlayerMovementSwitcher : MonoBehaviour
         fpsController.SetActive(true);
         simpleMoveController.SetActive(false);
         currentController = fpsController;
+
     }
 
     public void SwitchToSimple(Transform spawnPoint)
@@ -58,9 +59,13 @@ public class PlayerMovementSwitcher : MonoBehaviour
         if (currentController == fpsController)
         {
             currentController.GetComponent<PlayerDarkController>().DisablePlayerMove();
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
         else {
             currentController.GetComponent<PlayerLightController>().DisablePlayerMove();
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 
@@ -70,6 +75,8 @@ public class PlayerMovementSwitcher : MonoBehaviour
         if (currentController == fpsController)
         {
             currentController.GetComponent<PlayerDarkController>().EnablePlayerMove();
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
         else
         {

@@ -7,13 +7,28 @@ public class InspectableObject : MonoBehaviour
 
     private bool isPlayerNearby = false;
     private bool panelOpen = false;
+    private bool hasTriggeredDialogue = false;
 
     void Update()
     {
         if (isPlayerNearby && Input.GetKeyDown(KeyCode.F))
         {
             panelOpen = !panelOpen;
-            UIManager.Instance.ShowAnswerAreaPanel();
+
+            if (panelOpen)
+            {
+                UIManager.Instance.ShowAnswerAreaPanel();
+
+                if (!hasTriggeredDialogue)
+                {
+                    hasTriggeredDialogue = true;
+                    DialogueManager.Instance.StartDialogue("Tutorial_pedastal");
+                }
+            }
+            else
+            {
+                UIManager.Instance.HideAnswerAreaPanel();
+            }
         }
     }
 
@@ -31,8 +46,8 @@ public class InspectableObject : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerNearby = false;
-            UIManager.Instance.HideAnswerAreaPanel();
             UIManager.Instance.HidePressFReminder();
+            UIManager.Instance.HideAnswerAreaPanel();
             panelOpen = false;
         }
     }
