@@ -67,6 +67,7 @@ public class EndNode : BaseNode
 public class NarrativeNode : BaseNode
 {
     public string DialogueTag { get; private set; } = "";
+    public bool isBrightArea { get; private set; } = false;
 
     public override void Draw()
     {
@@ -80,6 +81,14 @@ public class NarrativeNode : BaseNode
         textField.SetValueWithoutNotify(DialogueTag);
 
         mainContainer.Add(textField);
+
+        var boolField = new Toggle("是否是光亮区域");
+        boolField.value = isBrightArea;
+        boolField.RegisterValueChangedCallback(evt =>
+        {
+            isBrightArea = evt.newValue;
+        });
+        mainContainer.Add(boolField);
     }
 
     public void SetDialogueTag(string tag)
@@ -90,6 +99,19 @@ public class NarrativeNode : BaseNode
         if (textField != null)
         {
             textField.SetValueWithoutNotify(tag);
+        }
+    }
+
+
+
+    public void SetDialogueType(bool type)
+    {
+        isBrightArea = type;
+        // 更新UI显示
+        var boolField = mainContainer.Q<Toggle>();
+        if (boolField != null)
+        {
+            boolField.SetValueWithoutNotify(type);
         }
     }
 }

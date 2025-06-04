@@ -14,5 +14,6 @@ public class DialogueLine
 {
     public string speaker;
     [TextArea] public string text;
+    public string audioTag;
     public float typingSpeed;
 }

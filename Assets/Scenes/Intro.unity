@@ -788,6 +788,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   debugMode: 1
+  audioAnswer: 
+  playerTransformWhite: {fileID: 0}
+  playerTransformBlack: {fileID: 0}
+  collectedAudioClips: []
 --- !u!1 &1133116355
 GameObject:
   m_ObjectHideFlags: 0

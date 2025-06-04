@@ -179,10 +179,17 @@ public class LevelFlowExecutor : MonoBehaviour
             var dialogueManager = FindObjectOfType<DialogueManager>();
             if (dialogueManager != null)
             {
-                dialogueManager.StartDialogue(node.tagValue, () => {
-                    // 对话完成后继续下一个节点
-                    MoveToNextNode(node);
-                });
+                if (node.isBrightArea)
+                {
+                    dialogueManager.StartDialogueWhiteArea(node.tagValue);
+                }
+                else {
+                    dialogueManager.StartDialogue(node.tagValue, () => {
+                        // 对话完成后继续下一个节点
+                        MoveToNextNode(node);
+                    });
+                }
+
             }
             else
             {

@@ -233,6 +233,7 @@ public class LevelFlowEditor : EditorWindow
             if (node is NarrativeNode narrativeNode && !string.IsNullOrEmpty(nodeData.tagValue))
             {
                 narrativeNode.SetDialogueTag(nodeData.tagValue);
+                narrativeNode.SetDialogueType(nodeData.isBrightArea);
             }
             else if (node is AnimationNode animationNode && !string.IsNullOrEmpty(nodeData.triggerValue))
             {
@@ -385,8 +386,12 @@ public class LevelFlowGraphView : GraphView
                 title = node.title
             };
 
-            if (node is NarrativeNode narrativeNode)
+            if (node is NarrativeNode narrativeNode) {
                 nodeData.tagValue = narrativeNode.DialogueTag;
+                nodeData.isBrightArea = narrativeNode.isBrightArea;
+            }
+
+          
 
             if (node is AnimationNode animationNode)
             {
@@ -442,9 +447,11 @@ public class LevelFlowGraphView : GraphView
                 position = node.GetPosition().position,
                 title = node.title
             };
-
             if (node is NarrativeNode narrativeNode)
+            {
                 nodeData.tagValue = narrativeNode.DialogueTag;
+                nodeData.isBrightArea = narrativeNode.isBrightArea;
+            }
 
             if (node is AnimationNode animationNode)
             {

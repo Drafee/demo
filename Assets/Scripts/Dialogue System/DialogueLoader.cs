@@ -36,10 +36,12 @@ public class DialogueCSVLoader : MonoBehaviour
                 if (fields.Length < 3) continue;
 
                 string tag = fields[0];
+                if (tag == null) return;
                 DialogueLine line = new DialogueLine
                 {
                     speaker = fields[1],
                     text = fields[2],
+                    audioTag = fields[3]
                 };
 
                 if (!dialogueGroups.ContainsKey(tag))

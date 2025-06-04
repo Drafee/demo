@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
+
 
 
 public abstract class AnimationSequencePlayer : MonoBehaviour
@@ -10,11 +10,7 @@ public abstract class AnimationSequencePlayer : MonoBehaviour
 
     protected virtual void StartSequence()
     {
-        Sequence seq = DOTween.Sequence();
-        seq.OnComplete(() =>
-        {
-            LevelFlowExecutor.Instance.OnAnimationComplete();
-        });
+
     }
 
     public void PlaySequence() {

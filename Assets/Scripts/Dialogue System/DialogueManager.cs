@@ -45,6 +45,136 @@ public class DialogueManager : MonoBehaviour
     private int currentLineIndex;
     private string currentLineFullText = ""; // 新增字段
     bool isTyping = false; // 添加状态标志
+
+    [Header("White Area UI 设置")]
+    public GameObject Exit;
+    public GameObject textButtonPrefab;
+    public List<Transform> worldCanvas;
+    public GameObject textUIPrefab;
+    public Transform playerCamera;
+    public float forwardSpacing = 2f;
+    public float sideSpacing = 2f;
+    public float height = 4f;
+
+    [Header("White Area 播放设置")]
+    public float wordReadSpeed = 0.2f; // 每个字的“播放时间”
+    public float pauseBetweenLines = 1f;
+
+    private List<DialogueLine> lines;
+    private int currentSpaceIndex;
+    private int direction = 1; // 用于左右交替
+    private GameObject door;
+
+    public void StartDialogueWhiteArea(string dialogueTag) {
+        Debug.Log("Start Talking");
+        playerCamera = PlayerMovementSwitcher.Instance.GetCurrentPlayerTransform();
+        lines = GetDialogueByTag(dialogueTag).lines;
+        Debug.Log("Lines count: " + lines.Count);
+        StartCoroutine(SpawnTextsOverTime());
+    }
+
+    IEnumerator SpawnTextsOverTime()
+    {
+        Vector3 basePos = playerCamera.position + playerCamera.forward * 15f + Vector3.up * height;
+        Vector3 spawnPos = basePos;
+
+        for (int i = 0; i < lines.Count; i++)
+        {
+            string line = lines[i].text;
+
+            GameObject textObj = Instantiate(textUIPrefab, spawnPos, Quaternion.identity);
+            textObj.transform.parent = worldCanvas[currentSpaceIndex];
+            // textObj.transform.rotation = Quaternion.LookRotation(textObj.transform.position - playerCamera.position);
+
+            TextMeshProUGUI textComp = textObj.GetComponentInChildren<TextMeshProUGUI>();
+            if (textComp != null)
+                textComp.text = line;
+
+            // 计算播放时长（按字数 * 每字时长）+ 停顿
+            float duration = line.Length * wordReadSpeed + pauseBetweenLines;
+
+            // 准备下一句位置（左右交替 + 向前推进）
+            direction *= -1;
+            spawnPos += playerCamera.forward * forwardSpacing + playerCamera.right * direction * sideSpacing + Vector3.up;
+
+            yield return new WaitForSeconds(duration);
+        }
+        yield return new WaitForSeconds(1f);
+        door = Instantiate(Exit, playerCamera.position + playerCamera.forward * 15f + Vector3.up, Quaternion.identity);
+        ShowSelectionButtons();
+    }
+
+    void ShowSelectionButtons()
+    {
+        door.transform.GetChild(0).GetComponent<Canvas>().worldCamera = playerCamera.GetComponentInChildren<Camera>();
+        Transform targetParent = door.transform
+            .GetChild(0)   // 第1层
+            .GetChild(0)   // 第2层
+            .GetChild(0)   // 第3层
+            .GetChild(0);  // 第4层
+
+        foreach (DialogueLine line in lines)
+        {
+            GameObject btnObj = Instantiate(textButtonPrefab);
+            btnObj.transform.SetParent(targetParent, false);
+
+            TextMeshProUGUI btnText = btnObj.GetComponentInChildren<TextMeshProUGUI>();
+            if (btnText == null)
+            {
+                Debug.LogError("TextMeshProUGUI component not found on prefab.");
+                continue;
+            }
+
+            btnText.text = line.text;
+
+            Button btn = btnObj.GetComponentInChildren<Button>();
+            if (btn == null)
+            {
+                Debug.LogError("Button component not found on prefab.");
+                continue;
+            }
+
+            Debug.Log(line.text);
+            string capturedLine = line.text;
+            btn.onClick.AddListener(() => OnSelectLine(capturedLine, btnObj));
+        }
+    }
+
+    GameObject currentlySelected;
+
+    void OnSelectLine(string selectedLine, GameObject buttonObj)
+    {
+        if (currentlySelected != null)
+        {
+            // 取消上一个高亮
+            currentlySelected.GetComponentInChildren<Image>().color = Color.white;
+        }
+
+        currentlySelected = buttonObj;
+        buttonObj.GetComponentInChildren<Image>().color = Color.yellow;  // 高亮
+
+        if (selectedLine == lines[lines.Count - 1].text)
+        {
+            Debug.Log("正确！");
+
+            LevelFlowExecutor.Instance.OnAnimationComplete();
+        }
+        else
+        {
+            Debug.Log("这不是你的答案");
+            // 可加提示音或震动等反馈
+        }
+    }
+
+    public void DestroyDoorsObjects() {
+        currentSpaceIndex++;
+        Destroy(door.gameObject);
+        foreach (Transform child in worldCanvas[currentSpaceIndex])
+        {
+            Destroy(child.gameObject);
+        }
+
+    }
     private void Start()
     {
         if (dialoguePanel != null)

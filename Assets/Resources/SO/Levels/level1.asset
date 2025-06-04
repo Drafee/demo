@@ -1,0 +1,130 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcb18a4b4045fb74cae4ba59286bbbf0, type: 3}
+  m_Name: level1
+  m_EditorClassIdentifier: 
+  nodes:
+  - guid: 2e768c4c-afc8-4152-b6ac-e64dd84c2a27
+    type: StartNode
+    position: {x: 27.333334, y: 182.66667}
+    tagValue: 
+    triggerValue: 
+    animatorValue: {fileID: 0}
+    sceneName: 
+    title: Start Node
+    levelSetting: {fileID: 0}
+    animationSequencePlayer: {fileID: 0}
+  - guid: 967f0d95-16af-4c8c-9bc9-86242b905b00
+    type: AudioLevelNode
+    position: {x: 178, y: 182.66667}
+    tagValue: 
+    triggerValue: 
+    animatorValue: {fileID: 0}
+    sceneName: 
+    title: "\u97F3\u9891\u7B49\u7EA7\u8282\u70B9"
+    levelSetting: {fileID: 11400000, guid: ceb9d03ee7de5ab4587f408ff5b8488b, type: 2}
+    animationSequencePlayer: {fileID: 0}
+  - guid: 837a1af7-ad6c-4cf3-9a13-861f63ea8581
+    type: AudioLevelNode
+    position: {x: 176, y: 323.3333}
+    tagValue: 
+    triggerValue: 
+    animatorValue: {fileID: 0}
+    sceneName: 
+    title: "\u97F3\u9891\u7B49\u7EA7\u8282\u70B9"
+    levelSetting: {fileID: 11400000, guid: b97776c956c94564dbf2bde36990dc33, type: 2}
+    animationSequencePlayer: {fileID: 0}
+  - guid: 56d6bb68-6650-41ff-8dd2-8e95a1b7042f
+    type: AudioLevelNode
+    position: {x: 176, y: 452}
+    tagValue: 
+    triggerValue: 
+    animatorValue: {fileID: 0}
+    sceneName: 
+    title: "\u97F3\u9891\u7B49\u7EA7\u8282\u70B9"
+    levelSetting: {fileID: 11400000, guid: f361e161577aaef48832c87c3df5e1e8, type: 2}
+    animationSequencePlayer: {fileID: 0}
+  - guid: e4e49096-d092-4aba-b4f3-79ef254be7c2
+    type: EndNode
+    position: {x: 1347.3334, y: 452}
+    tagValue: 
+    triggerValue: 
+    animatorValue: {fileID: 0}
+    sceneName: 
+    title: End Node
+    levelSetting: {fileID: 0}
+    animationSequencePlayer: {fileID: 0}
+  - guid: aee00b81-b2f7-4104-a8c1-8fcbd61e2cef
+    type: AnimationScriptNode
+    position: {x: 556, y: 323.3333}
+    tagValue: 
+    triggerValue: 
+    animatorValue: {fileID: 0}
+    sceneName: 
+    title: AnimationScript Node
+    levelSetting: {fileID: 0}
+    animationSequencePlayer: {fileID: 0}
+  - guid: 8abd76bc-1209-4b96-b275-fcb1066422d7
+    type: AnimationScriptNode
+    position: {x: 556, y: 452}
+    tagValue: 
+    triggerValue: 
+    animatorValue: {fileID: 0}
+    sceneName: 
+    title: AnimationScript Node
+    levelSetting: {fileID: 0}
+    animationSequencePlayer: {fileID: 0}
+  - guid: 02c69c13-3a67-4d9f-97f6-fcc42fa517c6
+    type: AnimationScriptNode
+    position: {x: 941.3333, y: 452}
+    tagValue: 
+    triggerValue: 
+    animatorValue: {fileID: 0}
+    sceneName: 
+    title: AnimationScript Node
+    levelSetting: {fileID: 0}
+    animationSequencePlayer: {fileID: 0}
+  - guid: b3775928-5ebd-4e4b-a648-cd9f98107326
+    type: AnimationScriptNode
+    position: {x: 556, y: 182.66667}
+    tagValue: 
+    triggerValue: 
+    animatorValue: {fileID: 0}
+    sceneName: 
+    title: AnimationScript Node
+    levelSetting: {fileID: 0}
+    animationSequencePlayer: {fileID: 0}
+  connections:
+  - fromNodeGuid: 2e768c4c-afc8-4152-b6ac-e64dd84c2a27
+    fromPortName: Output
+    toNodeGuid: 967f0d95-16af-4c8c-9bc9-86242b905b00
+    toPortName: Input
+  - fromNodeGuid: 56d6bb68-6650-41ff-8dd2-8e95a1b7042f
+    fromPortName: Output
+    toNodeGuid: 8abd76bc-1209-4b96-b275-fcb1066422d7
+    toPortName: Input
+  - fromNodeGuid: 02c69c13-3a67-4d9f-97f6-fcc42fa517c6
+    fromPortName: Output
+    toNodeGuid: e4e49096-d092-4aba-b4f3-79ef254be7c2
+    toPortName: Input
+  - fromNodeGuid: 8abd76bc-1209-4b96-b275-fcb1066422d7
+    fromPortName: Output
+    toNodeGuid: 02c69c13-3a67-4d9f-97f6-fcc42fa517c6
+    toPortName: Input
+  - fromNodeGuid: 837a1af7-ad6c-4cf3-9a13-861f63ea8581
+    fromPortName: Output
+    toNodeGuid: aee00b81-b2f7-4104-a8c1-8fcbd61e2cef
+    toPortName: Input
+  - fromNodeGuid: 967f0d95-16af-4c8c-9bc9-86242b905b00
+    fromPortName: Output
+    toNodeGuid: b3775928-5ebd-4e4b-a648-cd9f98107326
+    toPortName: Input
