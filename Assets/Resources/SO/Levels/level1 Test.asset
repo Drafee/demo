@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: level1 Test
   m_EditorClassIdentifier: 
   nodes:
-  - guid: df59bf88-2de3-4c86-b16b-70e60660a75c
+  - guid: f575f6cc-19b1-460b-b81a-e0f6b792a3de
     type: StartNode
     position: {x: 27.333334, y: 182.66667}
     tagValue: 
@@ -24,53 +24,9 @@ MonoBehaviour:
     title: Start Node
     levelSetting: {fileID: 0}
     animationSequencePlayer: {fileID: 0}
-  - guid: 13848dc5-deae-47ff-8be6-6a4186d0832a
+  - guid: 8032131f-b806-41be-b4fb-d53633a16e6d
     type: AudioLevelNode
-    position: {x: 266, y: 694.6667}
-    tagValue: 
-    isBrightArea: 0
-    triggerValue: 
-    animatorValue: {fileID: 0}
-    sceneName: 
-    title: "\u97F3\u9891\u7B49\u7EA7\u8282\u70B9"
-    levelSetting: {fileID: 11400000, guid: f361e161577aaef48832c87c3df5e1e8, type: 2}
-    animationSequencePlayer: {fileID: 0}
-  - guid: 3b047025-1e17-4692-8fd7-9a5e94ce9a34
-    type: AnimationScriptNode
-    position: {x: 595.3333, y: 644.6667}
-    tagValue: 
-    isBrightArea: 0
-    triggerValue: 
-    animatorValue: {fileID: 0}
-    sceneName: 
-    title: AnimationScript Node
-    levelSetting: {fileID: 0}
-    animationSequencePlayer: {fileID: 0}
-  - guid: 7b92c071-b318-4442-95a1-40016af5110a
-    type: AnimationScriptNode
-    position: {x: 941.3333, y: 715.3334}
-    tagValue: 
-    isBrightArea: 0
-    triggerValue: 
-    animatorValue: {fileID: 0}
-    sceneName: 
-    title: AnimationScript Node
-    levelSetting: {fileID: 0}
-    animationSequencePlayer: {fileID: 0}
-  - guid: 1cc1d9fe-677c-4295-8097-47b6f61dd50b
-    type: EndNode
-    position: {x: 1430.6666, y: 650.6667}
-    tagValue: 
-    isBrightArea: 0
-    triggerValue: 
-    animatorValue: {fileID: 0}
-    sceneName: 
-    title: End Node
-    levelSetting: {fileID: 0}
-    animationSequencePlayer: {fileID: 0}
-  - guid: 6a6a54a0-7ae6-4d79-9e2e-66034bad4134
-    type: AudioLevelNode
-    position: {x: 27.333334, y: 414}
+    position: {x: 176.66667, y: 424}
     tagValue: 
     isBrightArea: 0
     triggerValue: 
@@ -79,7 +35,7 @@ MonoBehaviour:
     title: "\u97F3\u9891\u7B49\u7EA7\u8282\u70B9"
     levelSetting: {fileID: 11400000, guid: b97776c956c94564dbf2bde36990dc33, type: 2}
     animationSequencePlayer: {fileID: 0}
-  - guid: 30ad372a-d6a9-40a9-b52f-97e58f1928d1
+  - guid: 0ab17f4b-1f05-4116-9fc4-498b302c66e3
     type: AudioLevelNode
     position: {x: 230.66667, y: 162.66667}
     tagValue: 
@@ -90,7 +46,51 @@ MonoBehaviour:
     title: "\u97F3\u9891\u7B49\u7EA7\u8282\u70B9"
     levelSetting: {fileID: 11400000, guid: ceb9d03ee7de5ab4587f408ff5b8488b, type: 2}
     animationSequencePlayer: {fileID: 0}
-  - guid: c8c2ae48-0851-4c97-9343-5e36a41abecc
+  - guid: 26be01a7-c3a5-4f3f-a919-709b53d2d277
+    type: AudioLevelNode
+    position: {x: 153.33333, y: 615.3334}
+    tagValue: 
+    isBrightArea: 0
+    triggerValue: 
+    animatorValue: {fileID: 0}
+    sceneName: 
+    title: "\u97F3\u9891\u7B49\u7EA7\u8282\u70B9"
+    levelSetting: {fileID: 11400000, guid: f361e161577aaef48832c87c3df5e1e8, type: 2}
+    animationSequencePlayer: {fileID: 0}
+  - guid: 83a88bcd-ac75-4575-b765-d3a636610f6c
+    type: NarrativeNode
+    position: {x: 1052, y: 138.66667}
+    tagValue: Scene1_1
+    isBrightArea: 1
+    triggerValue: 
+    animatorValue: {fileID: 0}
+    sceneName: 
+    title: Dialogue Node
+    levelSetting: {fileID: 0}
+    animationSequencePlayer: {fileID: 0}
+  - guid: 47258c6c-1054-45d1-afd4-9d58d3c10b7a
+    type: NarrativeNode
+    position: {x: 1082, y: 626.6667}
+    tagValue: Scene1_3
+    isBrightArea: 1
+    triggerValue: 
+    animatorValue: {fileID: 0}
+    sceneName: 
+    title: Dialogue Node
+    levelSetting: {fileID: 0}
+    animationSequencePlayer: {fileID: 0}
+  - guid: 5e6050fd-9569-4b82-84f9-21bafeff0c31
+    type: EndNode
+    position: {x: 1869.3334, y: 650.6667}
+    tagValue: 
+    isBrightArea: 0
+    triggerValue: 
+    animatorValue: {fileID: 0}
+    sceneName: 
+    title: End Node
+    levelSetting: {fileID: 0}
+    animationSequencePlayer: {fileID: 0}
+  - guid: 8ff20211-8374-4d35-907b-1692971a5c79
     type: AnimationScriptNode
     position: {x: 635.3333, y: 138.66667}
     tagValue: 
@@ -101,29 +101,7 @@ MonoBehaviour:
     title: AnimationScript Node
     levelSetting: {fileID: 0}
     animationSequencePlayer: {fileID: 0}
-  - guid: fdbfca3d-ae86-4eab-b742-9d541ce485ef
-    type: NarrativeNode
-    position: {x: 1073.3334, y: 138.66667}
-    tagValue: Scene1_1
-    isBrightArea: 1
-    triggerValue: 
-    animatorValue: {fileID: 0}
-    sceneName: 
-    title: Dialogue Node
-    levelSetting: {fileID: 0}
-    animationSequencePlayer: {fileID: 0}
-  - guid: a0f5cda2-7de5-4f9b-98a4-98e0867a7356
-    type: AnimationScriptNode
-    position: {x: 635.3333, y: 394}
-    tagValue: 
-    isBrightArea: 0
-    triggerValue: 
-    animatorValue: {fileID: 0}
-    sceneName: 
-    title: AnimationScript Node
-    levelSetting: {fileID: 0}
-    animationSequencePlayer: {fileID: 0}
-  - guid: 3b6e429c-8438-4b47-a0b9-bb5452c1e00d
+  - guid: 70c26799-3ee7-45aa-a577-983b73d864b2
     type: AnimationScriptNode
     position: {x: 1351.3334, y: 138.66667}
     tagValue: 
@@ -134,40 +112,111 @@ MonoBehaviour:
     title: AnimationScript Node
     levelSetting: {fileID: 0}
     animationSequencePlayer: {fileID: 0}
+  - guid: 712ae3d0-47ae-43fb-9e21-6219cc347712
+    type: AnimationScriptNode
+    position: {x: 688, y: 424}
+    tagValue: 
+    isBrightArea: 0
+    triggerValue: 
+    animatorValue: {fileID: 0}
+    sceneName: 
+    title: AnimationScript Node
+    levelSetting: {fileID: 0}
+    animationSequencePlayer: {fileID: 0}
+  - guid: e849a245-6cad-4d2a-a21e-9cd8731bf629
+    type: AnimationScriptNode
+    position: {x: 1366, y: 406}
+    tagValue: 
+    isBrightArea: 0
+    triggerValue: 
+    animatorValue: {fileID: 0}
+    sceneName: 
+    title: AnimationScript Node
+    levelSetting: {fileID: 0}
+    animationSequencePlayer: {fileID: 0}
+  - guid: 30c15988-3d6e-44ca-9911-8804a316140f
+    type: AnimationScriptNode
+    position: {x: 595.3333, y: 644.6667}
+    tagValue: 
+    isBrightArea: 0
+    triggerValue: 
+    animatorValue: {fileID: 0}
+    sceneName: 
+    title: AnimationScript Node
+    levelSetting: {fileID: 0}
+    animationSequencePlayer: {fileID: 0}
+  - guid: 9ddee3c9-00bd-4c3e-bcc3-39f8d953055f
+    type: AnimationScriptNode
+    position: {x: 1351.3334, y: 626.6667}
+    tagValue: 
+    isBrightArea: 0
+    triggerValue: 
+    animatorValue: {fileID: 0}
+    sceneName: 
+    title: AnimationScript Node
+    levelSetting: {fileID: 0}
+    animationSequencePlayer: {fileID: 0}
+  - guid: 9e76e345-0e35-4989-af06-4dd1fb56a4cb
+    type: NarrativeNode
+    position: {x: 1106.6666, y: 406}
+    tagValue: Scene1_2
+    isBrightArea: 1
+    triggerValue: 
+    animatorValue: {fileID: 0}
+    sceneName: 
+    title: Dialogue Node
+    levelSetting: {fileID: 0}
+    animationSequencePlayer: {fileID: 0}
   connections:
-  - fromNodeGuid: 13848dc5-deae-47ff-8be6-6a4186d0832a
+  - fromNodeGuid: 26be01a7-c3a5-4f3f-a919-709b53d2d277
     fromPortName: Output
-    toNodeGuid: 3b047025-1e17-4692-8fd7-9a5e94ce9a34
+    toNodeGuid: 30c15988-3d6e-44ca-9911-8804a316140f
     toPortName: Input
-  - fromNodeGuid: 7b92c071-b318-4442-95a1-40016af5110a
+  - fromNodeGuid: 9ddee3c9-00bd-4c3e-bcc3-39f8d953055f
     fromPortName: Output
-    toNodeGuid: 1cc1d9fe-677c-4295-8097-47b6f61dd50b
+    toNodeGuid: 5e6050fd-9569-4b82-84f9-21bafeff0c31
     toPortName: Input
-  - fromNodeGuid: 3b047025-1e17-4692-8fd7-9a5e94ce9a34
+  - fromNodeGuid: 8032131f-b806-41be-b4fb-d53633a16e6d
     fromPortName: Output
-    toNodeGuid: 7b92c071-b318-4442-95a1-40016af5110a
+    toNodeGuid: 712ae3d0-47ae-43fb-9e21-6219cc347712
     toPortName: Input
-  - fromNodeGuid: 6a6a54a0-7ae6-4d79-9e2e-66034bad4134
+  - fromNodeGuid: f575f6cc-19b1-460b-b81a-e0f6b792a3de
     fromPortName: Output
-    toNodeGuid: a0f5cda2-7de5-4f9b-98a4-98e0867a7356
+    toNodeGuid: 0ab17f4b-1f05-4116-9fc4-498b302c66e3
     toPortName: Input
-  - fromNodeGuid: df59bf88-2de3-4c86-b16b-70e60660a75c
+  - fromNodeGuid: 8ff20211-8374-4d35-907b-1692971a5c79
     fromPortName: Output
-    toNodeGuid: 30ad372a-d6a9-40a9-b52f-97e58f1928d1
+    toNodeGuid: 83a88bcd-ac75-4575-b765-d3a636610f6c
     toPortName: Input
-  - fromNodeGuid: c8c2ae48-0851-4c97-9343-5e36a41abecc
+  - fromNodeGuid: 0ab17f4b-1f05-4116-9fc4-498b302c66e3
     fromPortName: Output
-    toNodeGuid: fdbfca3d-ae86-4eab-b742-9d541ce485ef
+    toNodeGuid: 8ff20211-8374-4d35-907b-1692971a5c79
     toPortName: Input
-  - fromNodeGuid: 30ad372a-d6a9-40a9-b52f-97e58f1928d1
+  - fromNodeGuid: 83a88bcd-ac75-4575-b765-d3a636610f6c
     fromPortName: Output
-    toNodeGuid: c8c2ae48-0851-4c97-9343-5e36a41abecc
+    toNodeGuid: 70c26799-3ee7-45aa-a577-983b73d864b2
     toPortName: Input
-  - fromNodeGuid: fdbfca3d-ae86-4eab-b742-9d541ce485ef
+  - fromNodeGuid: 70c26799-3ee7-45aa-a577-983b73d864b2
     fromPortName: Output
-    toNodeGuid: 3b6e429c-8438-4b47-a0b9-bb5452c1e00d
+    toNodeGuid: 8032131f-b806-41be-b4fb-d53633a16e6d
     toPortName: Input
-  - fromNodeGuid: 3b6e429c-8438-4b47-a0b9-bb5452c1e00d
+  - fromNodeGuid: 712ae3d0-47ae-43fb-9e21-6219cc347712
     fromPortName: Output
-    toNodeGuid: 6a6a54a0-7ae6-4d79-9e2e-66034bad4134
+    toNodeGuid: 9e76e345-0e35-4989-af06-4dd1fb56a4cb
+    toPortName: Input
+  - fromNodeGuid: 9e76e345-0e35-4989-af06-4dd1fb56a4cb
+    fromPortName: Output
+    toNodeGuid: e849a245-6cad-4d2a-a21e-9cd8731bf629
+    toPortName: Input
+  - fromNodeGuid: e849a245-6cad-4d2a-a21e-9cd8731bf629
+    fromPortName: Output
+    toNodeGuid: 26be01a7-c3a5-4f3f-a919-709b53d2d277
+    toPortName: Input
+  - fromNodeGuid: 30c15988-3d6e-44ca-9911-8804a316140f
+    fromPortName: Output
+    toNodeGuid: 47258c6c-1054-45d1-afd4-9d58d3c10b7a
+    toPortName: Input
+  - fromNodeGuid: 47258c6c-1054-45d1-afd4-9d58d3c10b7a
+    fromPortName: Output
+    toNodeGuid: 9ddee3c9-00bd-4c3e-bcc3-39f8d953055f
     toPortName: Input

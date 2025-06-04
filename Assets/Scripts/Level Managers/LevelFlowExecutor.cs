@@ -29,6 +29,7 @@ public class LevelFlowExecutor : MonoBehaviour
     // Ö´ÐÐ×´Ì¬
     public bool IsExecuting => isExecuting;
     public NodeData CurrentNode => currentNode;
+    public int currentLevel;
     public static LevelFlowExecutor Instance { get; private set; }
 
     public List<CollectAudioClip> collectedAudioClips = new List<CollectAudioClip>();
@@ -228,6 +229,7 @@ public class LevelFlowExecutor : MonoBehaviour
     }
 
     private void ExecuteAnimationScriptNode(NodeData node) {
+        Debug.Log(node);
         node.animationSequencePlayer.PlaySequence();
     }
 
@@ -266,7 +268,9 @@ public class LevelFlowExecutor : MonoBehaviour
 
     private void ExecuteAudioLevelNode(NodeData node) {
         GameManager.Instance.SetState(GameStateType.Dark);
+        currentLevel = node.levelSetting.id;
         audioAnswer = string.Join("", node.levelSetting.audioAnswer.Select(r => r.id));
+        collectedAudioClips.Clear();
 
     }
 
@@ -300,7 +304,7 @@ public class LevelFlowExecutor : MonoBehaviour
 
     private void MoveToNextNode(NodeData currentNode)
     {
-        if (!isExecuting) return;
+        // if (!isExecuting) return;
 
         if (connectionMap.ContainsKey(currentNode.guid))
         {

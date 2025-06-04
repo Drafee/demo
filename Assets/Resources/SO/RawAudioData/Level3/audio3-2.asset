@@ -9,20 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a09995ab50f53ee448dccf5451bf65f6, type: 3}
-  m_Name: _Dialogue
+  m_Script: {fileID: 11500000, guid: 201caa79d2b96d843844ccd8344cd28a, type: 3}
+  m_Name: audio3-2
   m_EditorClassIdentifier: 
-  tag: 
-  lines:
-  - speaker: 
-    text: 
-    audioTag: 
-    typingSpeed: 0
-  - speaker: 
-    text: 
-    audioTag: 
-    typingSpeed: 0
-  - speaker: 
-    text: 
-    audioTag: 
-    typingSpeed: 0
+  soundName: audio3-2
+  id: 3-2
+  audioClip: {fileID: 8300000, guid: d8aba61a4a4886f41baf86ced0d94bb7, type: 3}

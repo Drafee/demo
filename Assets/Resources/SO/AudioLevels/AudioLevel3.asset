@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 3
   audioAnswer:
-  - {fileID: 11400000, guid: f86996dfa37f15c4c9ad57f9a914fe5b, type: 2}
-  - {fileID: 11400000, guid: 3a6e139ffff45334e805d5451968139c, type: 2}
-  - {fileID: 11400000, guid: 92b908b74a7591047b32395b83296a60, type: 2}
-  - {fileID: 11400000, guid: 92b908b74a7591047b32395b83296a60, type: 2}
-  - {fileID: 11400000, guid: 92b908b74a7591047b32395b83296a60, type: 2}
-  - {fileID: 11400000, guid: 92b908b74a7591047b32395b83296a60, type: 2}
+  - {fileID: 11400000, guid: 57b2490d375511c46ac643236549a8d4, type: 2}
+  - {fileID: 11400000, guid: 4bb7448e830dd9744bb6718ebc0ad684, type: 2}
+  - {fileID: 11400000, guid: 1aae5b1433877ae4bb4194d4bad0a2a4, type: 2}
+  - {fileID: 11400000, guid: faff4321207fe6a4e82bcfd45dd287c2, type: 2}
+  - {fileID: 11400000, guid: cf499e7df5e672141a716805dc7f79a9, type: 2}
+  - {fileID: 11400000, guid: e12f9569dfe08c4429a74f47efc1602b, type: 2}

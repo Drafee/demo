@@ -12,7 +12,8 @@ public class PortalTransition : AnimationSequencePlayer
     public Image whiteFade;
 
     [Header("Scene Elements")]
-    public GameObject door;
+    public List<GameObject> doors;
+    public int currentIndex = 0;
     public Transform doorTargetPoint;
     public Transform player;
     public MonoBehaviour playerControlScript;
@@ -31,6 +32,7 @@ public class PortalTransition : AnimationSequencePlayer
         Sequence seq = DOTween.Sequence();
         seq.OnComplete(() =>
         {
+            Debug.Log("放完啦");
             LevelFlowExecutor.Instance.OnAnimationComplete();
         });
 
@@ -41,14 +43,14 @@ public class PortalTransition : AnimationSequencePlayer
         // 2. 找玩家周围 2 米空位生成门
         player = PlayerMovementSwitcher.Instance.GetCurrentPlayerTransform();
 
-        Vector3 doorPos = door.transform.position;
+        Vector3 doorPos = doors[currentIndex].transform.position;
 
-        door.SetActive(true);
+        doors[currentIndex].SetActive(true);
 
         // 3. 门出现动画
 
         // 4. 玩家转向门
-        Quaternion lookRot = Quaternion.LookRotation(door.transform.position - player.position);
+        Quaternion lookRot = Quaternion.LookRotation(doors[currentIndex].transform.position - player.position);
         seq.Append(player.DORotateQuaternion(lookRot, 1f));
 
         // 5. 玩家行走
@@ -69,6 +71,7 @@ public class PortalTransition : AnimationSequencePlayer
 
         // 9. 恢复控制
         seq.AppendCallback(() => PlayerMovementSwitcher.Instance.ReleaseMove());
+        currentIndex++;
     }
 
     [ContextMenu("Test Portal Sequence")]

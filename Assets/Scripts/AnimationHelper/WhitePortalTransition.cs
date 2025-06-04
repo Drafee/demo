@@ -29,9 +29,6 @@ public class WhitePortalTransition : AnimationSequencePlayer
         Debug.Log("StartSequence 执行了");
 
         // Null 检查（可选但推荐）
-        Debug.Log(topBar);
-        Debug.Log(bottomBar);
-        Debug.Log(whiteFade);
         if (whiteFade == null) {
             whiteFade = GameObject.Find("WhiteFade").GetComponent<Image>();
         }

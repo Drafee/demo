@@ -61,7 +61,6 @@ public class DialogueManager : MonoBehaviour
     public float pauseBetweenLines = 1f;
 
     private List<DialogueLine> lines;
-    private int currentSpaceIndex;
     private int direction = 1; // 用于左右交替
     private GameObject door;
 
@@ -83,7 +82,7 @@ public class DialogueManager : MonoBehaviour
             string line = lines[i].text;
 
             GameObject textObj = Instantiate(textUIPrefab, spawnPos, Quaternion.identity);
-            textObj.transform.parent = worldCanvas[currentSpaceIndex];
+            textObj.transform.parent = worldCanvas[LevelFlowExecutor.Instance.currentLevel - 1];
             // textObj.transform.rotation = Quaternion.LookRotation(textObj.transform.position - playerCamera.position);
 
             TextMeshProUGUI textComp = textObj.GetComponentInChildren<TextMeshProUGUI>();
@@ -153,7 +152,9 @@ public class DialogueManager : MonoBehaviour
         currentlySelected = buttonObj;
         buttonObj.GetComponentInChildren<Image>().color = Color.yellow;  // 高亮
 
-        if (selectedLine == lines[lines.Count - 1].text)
+        if (LevelFlowExecutor.Instance.currentLevel == 1 && selectedLine == lines[lines.Count - 1].text ||
+            LevelFlowExecutor.Instance.currentLevel == 2 && selectedLine == lines[lines.Count - 2].text ||
+            LevelFlowExecutor.Instance.currentLevel == 3 && selectedLine == lines[lines.Count - 3].text)
         {
             Debug.Log("正确！");
 
@@ -167,9 +168,8 @@ public class DialogueManager : MonoBehaviour
     }
 
     public void DestroyDoorsObjects() {
-        currentSpaceIndex++;
         Destroy(door.gameObject);
-        foreach (Transform child in worldCanvas[currentSpaceIndex])
+        foreach (Transform child in worldCanvas[LevelFlowExecutor.Instance.currentLevel - 1])
         {
             Destroy(child.gameObject);
         }

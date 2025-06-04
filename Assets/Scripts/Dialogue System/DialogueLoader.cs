@@ -33,10 +33,11 @@ public class DialogueCSVLoader : MonoBehaviour
             while (!parser.EndOfData)
             {
                 string[] fields = parser.ReadFields();
-                if (fields.Length < 3) continue;
+                // if (fields.Length < 3) continue;
 
                 string tag = fields[0];
                 if (tag == null) return;
+                Debug.Log(tag);
                 DialogueLine line = new DialogueLine
                 {
                     speaker = fields[1],
@@ -53,7 +54,7 @@ public class DialogueCSVLoader : MonoBehaviour
 
         // Store Data into the scriptableObject
 #if UNITY_EDITOR
-        string outputPath = "Assets/SO/Dialogues/";
+        string outputPath = "Assets/Resources/SO/Dialogues/";
         if (!Directory.Exists(outputPath))
             Directory.CreateDirectory(outputPath);
 

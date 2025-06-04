@@ -11,7 +11,11 @@ public class UIAnswerArea : MonoBehaviour
     private List<CollectAudioClip> collectedAudioClipList = new List<CollectAudioClip>();
     private List<AudioAnswerPanelBag> bagIcons = new List<AudioAnswerPanelBag>();
     [Header("Answer Area")]
-    [SerializeField] private AnswerSlot[] allSlots;
+    [SerializeField] private AnswerSlot[] allSlots1;
+    [SerializeField] private AnswerSlot[] allSlots2;
+    [SerializeField] private AnswerSlot[] allSlots3;
+    private AnswerSlot[] currentAllSlots;
+    public List<GameObject> slotContainer;
     bool result;
 
     /*
@@ -55,7 +59,13 @@ public class UIAnswerArea : MonoBehaviour
 
     private void OnEnable()
     {
+
         StartCoroutine(InitBagUI());
+    }
+
+    private void OnDisable()
+    {
+        slotContainer[LevelFlowExecutor.Instance.currentLevel - 1].SetActive(false);
     }
     private IEnumerator InitBagUI()
     {
@@ -66,7 +76,7 @@ public class UIAnswerArea : MonoBehaviour
             Debug.LogError("LevelFlowExecutor.Instance是null！");
             yield break;
         }
-
+        slotContainer[LevelFlowExecutor.Instance.currentLevel - 1].SetActive(true);
         foreach (var icon in bagIcons)
         {
             Destroy(icon.gameObject);
@@ -80,7 +90,18 @@ public class UIAnswerArea : MonoBehaviour
 
         // 获取 Slot 中已使用的 clip 名字
         HashSet<string> usedClipNames = new HashSet<string>();
-        foreach (var slot in allSlots)
+        switch (LevelFlowExecutor.Instance.currentLevel) {
+            case 1:
+                currentAllSlots = allSlots1;
+                break;
+            case 2:
+                currentAllSlots = allSlots2;
+                break;
+            case 3:
+                currentAllSlots = allSlots3;
+                break;
+        }
+        foreach (var slot in currentAllSlots)
         {
             if (slot.currentAudioClipItem!= null && slot.currentAudioClipItem.collectAudioClip != null && slot.currentAudioClipItem.collectAudioClip.audioData != null && slot.currentAudioClipItem.collectAudioClip.audioData.id != null)
             {
@@ -109,10 +130,10 @@ public class UIAnswerArea : MonoBehaviour
     public void CheckAnswer() {
         if (result)
             return;
-        string[] clipIds = new string[allSlots.Length];
-        for (int i = 0; i < allSlots.Length; i++)
+        string[] clipIds = new string[currentAllSlots.Length];
+        for (int i = 0; i < currentAllSlots.Length; i++)
         {
-            var slot = allSlots[i];
+            var slot = currentAllSlots[i];
             string clipId = slot.currentAudioClipItem != null ? slot.currentAudioClipItem.collectAudioClip.audioData.id : "";
             clipIds[i] = clipId;
         }
@@ -123,6 +144,7 @@ public class UIAnswerArea : MonoBehaviour
         result = LevelFlowExecutor.Instance.CheckAnswer(joined);
         if (result) {
             UIManager.Instance.HideAnswerAreaPanel();
+            result = false;
         }
     }
 }
