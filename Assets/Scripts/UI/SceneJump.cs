@@ -8,4 +8,9 @@ public class SceneJump : MonoBehaviour
     public void JumpToIntro() {
         SceneManager.LoadScene(1);
     }
+
+    public void JumpToFirst()
+    {
+        SceneManager.LoadScene(0);
+    }
 }

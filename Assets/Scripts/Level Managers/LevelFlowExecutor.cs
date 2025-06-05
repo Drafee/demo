@@ -185,6 +185,7 @@ public class LevelFlowExecutor : MonoBehaviour
                     dialogueManager.StartDialogueWhiteArea(node.tagValue);
                 }
                 else {
+                    Debug.Log("Start Dialogue " + node.tagValue);
                     dialogueManager.StartDialogue(node.tagValue, () => {
                         // 对话完成后继续下一个节点
                         MoveToNextNode(node);
