@@ -1,2 +1,2 @@
-# mihoyo
-mihoyo demo
+# Demo
+a demo of a game
